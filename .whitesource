@@ -1,0 +1,11 @@
+{
+  "generalSettings": {
+    "shouldScanRepo": true
+  },
+  "checkRunSettings": {
+    "vulnerableCheckRunConclusionLevel": "success"
+  },
+  "issueSettings": {
+    "minSeverityLevel": "LOW"
+  }
+}
