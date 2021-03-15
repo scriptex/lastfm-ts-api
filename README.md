@@ -1,87 +1,10 @@
-# Universal Github Client
+# TypeScript API for last.fm
 
-> A Github API Client for the browser and Node JS
+> A Last.FM API written in TypeScript
 
-## Installation and getting started
+## Installation, usage, etc.
 
-First install the package
-
-```sh
-npm i universal-github-client
-
-# or
-
-yarn add universal-github-client
-```
-
-Then you need to generate a new token from your [Github profile](https://github.com/settings/tokens) and make sure that this token has access to the relevant scopes that you plan to query the API for.
-
-Then you need to configure and setup your Github Client instance:
-
-### In Node
-
-You need to install a fetch polyfill because Node does not include one.
-
-```sh
-npm i node-fetch
-
-# or
-
-yarn add node-fetch
-```
-
-```javascript
-const fetch = require('node-fetch');
-const { GithubClient } = require('universal-github-client');
-
-const client = new GitHubClient({
-	base: 'https://api.github.com',
-	token: 'YOUR_GITHUB_TOKEN_HERE',
-	fetch
-});
-```
-
-### In browser
-
-Please note that this package is supported by browsers which implement natively the Fetch API and have support for Promises.
-If you are using an outdated browser, you need to install a polyfill for Fetch and Promises.
-
-```javascript
-
-import { GithubClient } = from 'universal-github-client';
-
-const client = new GitHubClient({
-	base: 'https://api.github.com',
-	token: 'YOUR_GITHUB_TOKEN_HERE',
-	fetch
-});
-```
-
-## Usage
-
-When you have installed and configured the `client`, you can make calls to the [Github API](https://developer.github.com/v3/):
-
-You can use the paths defined in the [Github API](https://developer.github.com/v3/) documentation.
-
-For example, if you want to [get the repositories](https://developer.github.com/v3/repos/#list-repositories-for-a-user) for a user you need to do the following:
-
-```javascript
-const repos = client.get({ path: '/users/scriptex/repo' }); // scriptex is the Github user name
-```
-
-There are five different instance methods based on the HTTP method required by a particular endpoint in the Github API.
-
-```javascript
-client.get({ path });
-
-client.post({ path, data });
-
-client.delete({ path });
-
-client.put({ path, data });
-
-client.patch({ path, data });
-```
+TODO
 
 ## Support this project
 
