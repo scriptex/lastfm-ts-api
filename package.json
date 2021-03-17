@@ -1,5 +1,5 @@
 {
-	"name": "last-fm-ts-api",
+	"name": "lastfm-ts-api",
 	"version": "1.0.0",
 	"description": "API client for Last.FM with full TypeScript support",
 	"scripts": {
