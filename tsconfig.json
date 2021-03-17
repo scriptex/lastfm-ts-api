@@ -11,7 +11,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"importHelpers": false,
 		"noEmitHelpers": false,
-		"lib": ["es5", "es2019"],
+		"lib": ["ES5", "ESNext"],
 		"outDir": "dist",
 		"module": "umd",
 		"moduleResolution": "node",
