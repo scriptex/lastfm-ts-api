@@ -23,7 +23,7 @@
 	"typings": "dist/index.d.ts",
 	"dependencies": {},
 	"devDependencies": {
-		"@types/node": "16.11.35",
+		"@types/node": "16.11.36",
 		"tslib": "2.4.0",
 		"typescript": "4.6.4"
 	}
