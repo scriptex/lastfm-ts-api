@@ -25,6 +25,6 @@
 	"devDependencies": {
 		"@types/node": "16.11.36",
 		"tslib": "2.4.0",
-		"typescript": "4.6.4"
+		"typescript": "4.7.2"
 	}
 }
