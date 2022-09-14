@@ -2,9 +2,10 @@ import { createHash } from 'crypto';
 import { parse, stringify } from 'querystring';
 import { request, RequestOptions } from 'https';
 
-export type UnknownFunction = (...args: unknown[]) => unknown;
-export type Param = string | string[];
-export type Params<T> = Record<string, Param | T>;
+export type LastFMUnknownFunction = (...args: unknown[]) => unknown;
+export type LastFMParam = string | string[];
+export type LastFMParams<T> = Record<string, LastFMParam | T>;
+export type LastFMRequestParams<T> = Record<string, LastFMParam | T>;
 
 export class LastFMApiRequest {
 	private params: Map<string, any> = new Map();
@@ -13,7 +14,7 @@ export class LastFMApiRequest {
 		this.params.set('format', 'json');
 	}
 
-	public set<T>(params: Params<void | T>): LastFMApiRequest {
+	public set<T>(params: LastFMParams<void | T>): LastFMApiRequest {
 		Object.entries(params).forEach(([key, value]) => {
 			if (typeof value !== 'undefined') {
 				this.params.set(key, value);
@@ -24,7 +25,7 @@ export class LastFMApiRequest {
 	}
 
 	public sign(secret?: string): LastFMApiRequest {
-		const paramsObj: Params<string> = this.setParams();
+		const paramsObj: LastFMParams<string> = this.setParams();
 		const paramsObjParsed = parse(stringify(paramsObj));
 
 		const paramsStr = Array.from(Object.entries(paramsObjParsed))
@@ -58,7 +59,10 @@ export class LastFMApiRequest {
 		return this;
 	}
 
-	public send(method?: string | UnknownFunction, callback?: UnknownFunction): void | Promise<LastFMApiRequest> {
+	public send(
+		method?: string | LastFMUnknownFunction,
+		callback?: LastFMUnknownFunction
+	): void | Promise<LastFMApiRequest> {
 		callback =
 			callback === undefined
 				? typeof method === 'function'
@@ -73,7 +77,7 @@ export class LastFMApiRequest {
 			this.params.delete('callback');
 		}
 
-		const paramsObj: Params<string> = this.setParams();
+		const paramsObj: LastFMParams<string> = this.setParams();
 		const paramsStr = stringify(paramsObj);
 
 		const options: RequestOptions = {
@@ -136,8 +140,8 @@ export class LastFMApiRequest {
 		return LastFMapiRequest;
 	}
 
-	private setParams(): Params<string> {
-		const result: Params<string> = {};
+	private setParams(): LastFMParams<string> {
+		const result: LastFMParams<string> = {};
 
 		this.params.forEach((value, key) => {
 			if (typeof value !== 'undefined') {
