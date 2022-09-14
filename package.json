@@ -1,29 +1,34 @@
 {
 	"name": "lastfm-ts-api",
 	"version": "1.0.0",
-	"description": "API client for Last.FM with full TypeScript support",
+	"description": "An API client for the Last.FM API written in TypeScript",
+	"keywords": [
+		"Last.FM",
+		"Last.FM API",
+		"Last.FM API Client",
+		"Last.FM TypeScript API"
+	],
+	"homepage": "https://atanas.info/projects/lastfm-ts-api.html",
+	"bugs": {
+		"url": "https://github.com/scriptex/last-fm-ts-api/issues",
+		"email": "hi@atanas.info"
+	},
+	"license": "MIT",
+	"author": "Atanas Atanasov <hi@atanas.info> (https://atanas.info)",
+	"funding": "https://github.com/sponsors/scriptex",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "github:scriptex/lastfm-ts-api"
+	},
 	"scripts": {
 		"watch": "tsc -w",
 		"build": "tsc"
 	},
-	"keywords": [
-		"Last.FM API",
-		"Last.FM",
-		"API Client",
-		"TypeScript API"
-	],
-	"author": "Atanas Atanasov <scriptex.bg@gmail.com> (https://atanas.info)",
-	"repository": "git@github.com:scriptex/last-fm-ts-api.git",
-	"bugs": {
-		"url": "https://github.com/scriptex/last-fm-ts-api/issues",
-		"email": "scriptex.bg@gmail.com"
-	},
-	"license": "MIT",
-	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
 	"dependencies": {},
 	"devDependencies": {
-		"@types/node": "16.11.59",
+		"@types/node": "18.7.18",
 		"tslib": "2.4.0",
 		"typescript": "4.8.3"
 	}

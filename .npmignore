@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Dependency directory
-node_modules/
+node_modules
 
 # Misc
 .DS_Store
@@ -17,35 +17,23 @@ node_modules/
 ehthumbs.db
 Thumbs.db
 
-# EditorConfig
+# Config folders and files
+.github
+_config.yml
+_.config.yml
 .editorconfig
-
-# Git
 .gitattributes
 .gitignore
-
-# CI
-.travis.yml
-
-# lock files
-yarn.lock
-
-# Prettier
+.nvmrc
 .prettierignore
 .prettierrc
-
-# Config files
-.github
-_.config.yml
-_config.yml
-.babelrc
-.nowignore
-.nvmrc
+.stylelintignore
+.stylelintrc
+.travis.yml
 .whitesource
 renovate.json
-tslint.json
 tsconfig.json
-postcss.config.js
-webpack.config.js
+tslint.json
+yarn.lock
 
-# Project specific
+!dist
