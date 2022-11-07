@@ -1,6 +1,6 @@
 {
 	"name": "lastfm-ts-api",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "An API client for the Last.FM API written in TypeScript",
 	"keywords": [
 		"Last.FM",
@@ -8,7 +8,7 @@
 		"Last.FM API Client",
 		"Last.FM TypeScript API"
 	],
-	"homepage": "https://atanas.info/projects/lastfm-ts-api.html",
+	"homepage": "https://atanas.info/portfolio/open-source/lastfm-ts-api",
 	"bugs": {
 		"url": "https://github.com/scriptex/last-fm-ts-api/issues",
 		"email": "hi@atanas.info"
