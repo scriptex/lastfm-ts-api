@@ -28,7 +28,7 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@types/node": "18.16.17",
+		"@types/node": "18.16.18",
 		"tslib": "2.5.3",
 		"typescript": "5.1.3"
 	}
