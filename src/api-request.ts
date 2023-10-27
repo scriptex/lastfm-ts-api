@@ -2,19 +2,22 @@ import { createHash } from 'crypto';
 import { parse, stringify } from 'querystring';
 import { request, RequestOptions } from 'https';
 
-export type LastFMUnknownFunction = (...args: unknown[]) => unknown;
 export type LastFMParam = string | string[];
 export type LastFMParams<T> = Record<string, LastFMParam | T>;
+export type LastFMVoidOrNumber = void | number;
+export type LastFMBooleanNumber = 0 | 1;
+export type LastFMUnknownFunction = (...args: unknown[]) => unknown;
 export type LastFMRequestParams<T> = Record<string, LastFMParam | T>;
+export type LastFMBooleanNumberOrVoid = LastFMBooleanNumber | void;
 
-export class LastFMApiRequest {
+export class LastFMApiRequest<T> {
 	private params: Map<string, any> = new Map();
 
 	constructor() {
 		this.params.set('format', 'json');
 	}
 
-	public set<T>(params: LastFMParams<void | T>): LastFMApiRequest {
+	public set<P>(params: LastFMParams<void | P>): this {
 		Object.entries(params).forEach(([key, value]) => {
 			if (typeof value !== 'undefined') {
 				this.params.set(key, value);
@@ -24,7 +27,7 @@ export class LastFMApiRequest {
 		return this;
 	}
 
-	public sign(secret?: string): LastFMApiRequest {
+	public sign(secret?: string): this {
 		const paramsObj: LastFMParams<string> = this.setParams();
 		const paramsObjParsed = parse(stringify(paramsObj));
 
@@ -59,10 +62,7 @@ export class LastFMApiRequest {
 		return this;
 	}
 
-	public send(
-		method?: string | LastFMUnknownFunction,
-		callback?: LastFMUnknownFunction
-	): void | Promise<LastFMApiRequest> {
+	public send(method?: string | LastFMUnknownFunction, callback?: LastFMUnknownFunction): Promise<T> {
 		callback =
 			callback === undefined
 				? typeof method === 'function'
@@ -71,6 +71,7 @@ export class LastFMApiRequest {
 				: typeof callback === 'function'
 				? callback
 				: undefined;
+
 		method = typeof method === 'string' ? method : undefined;
 
 		if (this.params.has('callback')) {
@@ -129,12 +130,10 @@ export class LastFMApiRequest {
 		});
 
 		if (callback && typeof callback === 'function') {
-			LastFMapiRequest.then(
+			return LastFMapiRequest.then(
 				data => callback!(null, data),
 				err => callback!(err, null)
-			);
-
-			return undefined;
+			) as typeof LastFMapiRequest;
 		}
 
 		return LastFMapiRequest;
