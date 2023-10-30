@@ -16,6 +16,10 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
-            - run: yarn
-            - run: yarn build
-            - run: yarn demo
+            - name: Build
+              run: |
+                  yarn
+                  yarn build
+                  yarn demo
+              env:
+                  LAST_FM_API_KEY: ${{ secrets.LAST_FM_API_KEY }}

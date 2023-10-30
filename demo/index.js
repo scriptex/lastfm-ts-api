@@ -1,3 +1,7 @@
+// @ts-nocheck
+
+import { config } from 'dotenv';
+
 import {
 	LastFMGeo,
 	LastFMTag,
@@ -9,8 +13,9 @@ import {
 	LastFMLibrary
 } from '../dist';
 
-// Your API key here
-const API_KEY = '';
+config();
+
+const API_KEY = process.env.LAST_FM_API_KEY;
 
 const geo = new LastFMGeo(API_KEY);
 const tag = new LastFMTag(API_KEY);
@@ -51,7 +56,7 @@ user.getWeeklyChartList({ user: 'scriptex' }).then(print);
 user.getWeeklyTrackChart({ user: 'scriptex' }).then(print);
 
 album.getInfo({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
-album.getTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
+// album.getTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
 album.getTopTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
 album.search({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
 
@@ -62,14 +67,14 @@ chart.getTopTracks({ limit: 2 }).then(print);
 track.getCorrection({ track: 'Firestarter', artist: 'The Prodigy' }).then(print);
 track.getInfo({ track: 'Firestarter', artist: 'The Prodigy' }).then(print);
 track.getSimilar({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
-track.getTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
+// track.getTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
 track.getTopTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
 track.search({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
 
 artist.getCorrection({ artist: 'The Prodigy' }).then(print);
 artist.getInfo({ artist: 'The Prodigy' }).then(print);
 artist.getSimilar({ artist: 'The Prodigy', limit: 2 }).then(print);
-artist.getTags({ artist: 'The Prodigy' }).then(print);
+// artist.getTags({ artist: 'The Prodigy' }).then(print);
 artist.getTopAlbums({ artist: 'The Prodigy', limit: 2 }).then(print);
 artist.getTopTags({ artist: 'The Prodigy' }).then(print);
 artist.getTopTracks({ artist: 'The Prodigy', limit: 2 }).then(print);
