@@ -608,3 +608,161 @@ export type LastFMLibraryGetArtistsResponse = Readonly<{
 		};
 	};
 }>;
+
+export type LastFMTagParams = LastFMRequestParams<number | void> &
+	Readonly<{
+		tag: string;
+	}>;
+
+export type LastFMTagOptionalParams = Readonly<{
+	page?: number;
+	limit?: number;
+}>;
+
+export type LastFMTagGetInfoParams = LastFMRequestParams<number | void> &
+	LastFMTagParams &
+	Readonly<{
+		lang?: string;
+	}>;
+
+export type LastFMTagGetTopParams = LastFMRequestParams<number | void> & LastFMTagParams & LastFMTagOptionalParams;
+
+export type LastFMTagGetInfoResponse = Readonly<{
+	tag: {
+		name: string;
+		total: number;
+		reach: number;
+		wiki: {
+			summary: string;
+			content: string;
+		};
+	};
+}>;
+
+export type LastFMTagGetSimilarResponse = Readonly<{
+	similartags: {
+		tag: Array<{
+			url: string;
+			name: string;
+		}>;
+		'@attr': {
+			tag: string;
+		};
+	};
+}>;
+
+export type LastFMTagGetTopAlbumsResponse = Readonly<{
+	albums: {
+		album: Array<{
+			name: string;
+			mbid: string;
+			url: string;
+			artist: {
+				name: string;
+				mbid: string;
+				url: string;
+			};
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			'@attr': {
+				rank: string;
+			};
+		}>;
+		'@attr': {
+			tag: string;
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMTagGetTopArtistsResponse = Readonly<{
+	topartists: {
+		artist: Array<{
+			name: string;
+			mbid: string;
+			url: string;
+			streamable: LastFMBooleanNumber;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			'@attr': {
+				rank: string;
+			};
+		}>;
+		'@attr': {
+			tag: string;
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMTagGetTopTagsResponse = Readonly<{
+	toptags: {
+		'@attr': {
+			offset: number;
+			num_res: number;
+			total: number;
+		};
+		tag: Array<{
+			name: string;
+			count: number;
+			reach: number;
+		}>;
+	};
+}>;
+
+export type LastFMTagGetTopTracksResponse = Readonly<{
+	tracks: {
+		track: Array<{
+			name: string;
+			duration: string;
+			mbid: string;
+			url: string;
+			streamable: {
+				'#text': string;
+				fulltrack: string;
+			};
+			artist: {
+				name: string;
+				mbid: string;
+				url: string;
+			};
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			'@attr': {
+				rank: string;
+			};
+		}>;
+		'@attr': {
+			tag: string;
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMTagGetWeeklyChartListResponse = Readonly<{
+	weeklychartlist: {
+		chart: Array<{
+			'#text': string;
+			from: string;
+			to: string;
+		}>;
+		'@attr': {
+			tag: string;
+		};
+	};
+}>;
