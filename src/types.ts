@@ -1051,3 +1051,392 @@ export type LastFMUpdateNowPlayingResponse = Readonly<{
 		};
 	};
 }>;
+
+export type LastFMUserParams = LastFMRequestParams<LastFMParam | number | void | boolean> &
+	Readonly<{
+		user: string;
+	}>;
+
+export type LastFMUserOptionalParams = Readonly<{
+	page?: number;
+	limit?: number;
+}>;
+
+export type LastFMUserGetFriendsParams = LastFMUserParams &
+	LastFMUserOptionalParams &
+	Readonly<{
+		recenttracks?: boolean;
+	}>;
+
+export type LastFMUserGetLovedTracksParams = LastFMUserParams & LastFMUserOptionalParams;
+
+export type LastFMUserGetPersonalTagsParams = LastFMUserParams &
+	LastFMUserOptionalParams &
+	Readonly<{
+		tag?: string;
+		taggingtype: 'artist' | 'album' | 'track';
+	}>;
+
+export type LastFMUserGetRecentTracksParams = LastFMUserParams &
+	LastFMUserOptionalParams &
+	Readonly<{
+		to?: string;
+		from?: string;
+		extended: 0 | 1;
+	}>;
+
+export type LastFMUserGetTopParams = LastFMUserParams &
+	LastFMUserOptionalParams &
+	Readonly<{
+		period?: 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
+	}>;
+
+export type LastFMUserGetTopTagsParams = LastFMRequestParams<string | number | void> &
+	Readonly<{
+		user: string;
+		limit?: number;
+	}>;
+
+export type LastFMUserGetWeeklyParams = LastFMRequestParams<string | number | void> &
+	Readonly<{
+		to?: string;
+		user: string;
+		from?: string;
+	}>;
+
+export type LastFMUserGetFriendsResponse = Readonly<{
+	friends: {
+		'@attr': {
+			user: string;
+			totalPages: string;
+			page: string;
+			perPage: string;
+			total: string;
+		};
+		user: Array<{
+			name: string;
+			url: string;
+			country: string;
+			playlists: string;
+			playcount: string;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			registered: {
+				unixtime: string;
+				'#text': string;
+			};
+			realname: string;
+			subscriber: LastFMBooleanNumber;
+			bootstrap: LastFMBooleanNumber;
+			type: string;
+		}>;
+	};
+}>;
+
+export type LastFMUserGetInfoResponse = Readonly<{
+	user: {
+		name: string;
+		age: string;
+		subscriber: LastFMBooleanNumber;
+		realname: string;
+		bootstrap: LastFMBooleanNumber;
+		playcount: string;
+		artist_count: string;
+		playlists: string;
+		track_count: string;
+		album_count: string;
+		image: Array<{
+			'#text': string;
+			size: string;
+		}>;
+		registered: {
+			unixtime: string;
+			'#text': number;
+		};
+		country: string;
+		gender: string;
+		url: string;
+		type: string;
+	};
+}>;
+
+export type LastFMUserGetLovedTracksResponse = Readonly<{
+	lovedtracks: {
+		track: Array<{
+			artist: {
+				url: string;
+				name: string;
+				mbid: string;
+			};
+			date: {
+				uts: string;
+				'#text': string;
+			};
+			mbid: string;
+			url: string;
+			name: string;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			streamable: {
+				fulltrack: string;
+				'#text': string;
+			};
+		}>;
+		'@attr': {
+			user: string;
+			totalPages: string;
+			page: string;
+			perPage: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetPersonalTagsResponse = Readonly<{
+	taggings: {
+		artists: {
+			artist: Array<{
+				name: string;
+				mbid: string;
+				url: string;
+				streamable: LastFMBooleanNumber;
+				image: Array<{
+					'#text': string;
+					size: string;
+				}>;
+			}>;
+		};
+		'@attr': {
+			user: string;
+			tag: string;
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetRecentTracksResponse = Readonly<{
+	recenttracks: {
+		track: Array<{
+			artist: {
+				mbid: string;
+				'#text': string;
+			};
+			streamable: LastFMBooleanNumber;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			mbid: string;
+			album: {
+				mbid: string;
+				'#text': string;
+			};
+			name: string;
+			url: string;
+			date: {
+				uts: string;
+				'#text': string;
+			};
+		}>;
+		'@attr': {
+			user: string;
+			totalPages: string;
+			page: string;
+			perPage: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetTopAlbumsResponse = Readonly<{
+	topalbums: {
+		album: Array<{
+			artist: {
+				url: string;
+				name: string;
+				mbid: string;
+			};
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			mbid: string;
+			url: string;
+			playcount: string;
+			'@attr': {
+				rank: string;
+			};
+			name: string;
+		}>;
+		'@attr': {
+			user: string;
+			totalPages: string;
+			page: string;
+			perPage: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetTopArtistsResponse = Readonly<{
+	topartists: {
+		artist: Array<{
+			streamable: LastFMBooleanNumber;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			mbid: string;
+			url: string;
+			playcount: string;
+			'@attr': {
+				rank: string;
+			};
+			name: string;
+		}>;
+		'@attr': {
+			user: string;
+			totalPages: string;
+			page: string;
+			perPage: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetTopTagsResponse = Readonly<{
+	toptags: {
+		tag: Array<{
+			name: string;
+			count: string;
+			url: string;
+		}>;
+		'@attr': {
+			user: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetTopTracksResponse = Readonly<{
+	toptracks: {
+		track: Array<{
+			streamable: {
+				fulltrack: string;
+				'#text': string;
+			};
+			mbid: string;
+			name: string;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			artist: {
+				url: string;
+				name: string;
+				mbid: string;
+			};
+			url: string;
+			duration: string;
+			'@attr': {
+				rank: string;
+			};
+			playcount: string;
+		}>;
+		'@attr': {
+			user: string;
+			totalPages: string;
+			page: string;
+			perPage: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetWeeklyAlbumChartResponse = Readonly<{
+	weeklyalbumchart: {
+		album: Array<{
+			artist: {
+				mbid: string;
+				'#text': string;
+			};
+			mbid: string;
+			url: string;
+			name: string;
+			'@attr': {
+				rank: string;
+			};
+			playcount: string;
+		}>;
+		'@attr': {
+			from: string;
+			user: string;
+			to: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetWeeklyArtistChartResponse = Readonly<{
+	weeklyartistchart: {
+		artist: Array<{
+			mbid: string;
+			url: string;
+			name: string;
+			'@attr': {
+				rank: string;
+			};
+			playcount: string;
+		}>;
+		'@attr': {
+			from: string;
+			user: string;
+			to: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetWeeklyChartListResponse = Readonly<{
+	weeklychartlist: {
+		chart: Array<{
+			'#text': string;
+			from: string;
+			to: string;
+		}>;
+		'@attr': {
+			user: string;
+		};
+	};
+}>;
+
+export type LastFMUserGetWeeklyTrackChartResponse = Readonly<{
+	weeklytrackchart: {
+		track: Array<{
+			artist: {
+				mbid: string;
+				'#text': string;
+			};
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			mbid: string;
+			url: string;
+			name: string;
+			'@attr': {
+				rank: string;
+			};
+			playcount: string;
+		}>;
+		'@attr': {
+			from: string;
+			user: string;
+			to: string;
+		};
+	};
+}>;
