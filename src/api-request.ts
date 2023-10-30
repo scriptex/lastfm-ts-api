@@ -57,16 +57,9 @@ export class LastFMApiRequest<T> {
 	}
 
 	public send(method?: string | LastFMUnknownFunction, callback?: LastFMUnknownFunction): Promise<T> {
-		callback =
-			callback === undefined
-				? typeof method === 'function'
-					? method
-					: undefined
-				: typeof callback === 'function'
-				? callback
-				: undefined;
+		callback = this.getCallback(method, callback);
 
-		method = typeof method === 'string' ? method : undefined;
+		method = this.getMethod(method);
 
 		if (this.params.has('callback')) {
 			this.params.delete('callback');
@@ -74,21 +67,7 @@ export class LastFMApiRequest<T> {
 
 		const paramsObj: LastFMParams<string> = this.setParams();
 		const paramsStr = stringify(paramsObj);
-
-		const options: RequestOptions = {
-			hostname: 'ws.audioscrobbler.com',
-			path: '/2.0'
-		};
-
-		if (method === 'POST') {
-			options.method = 'POST';
-			options.headers = {
-				'Content-Length': Buffer.byteLength(paramsStr),
-				'Content-Type': 'application/x-www-form-urlencoded'
-			};
-		} else {
-			options.path += `?${paramsStr}`;
-		}
+		const options = this.getOptions(method, paramsStr);
 
 		const LastFMapiRequest = new Promise((resolve, reject) => {
 			const httpRequest = request(options, httpResponse => {
@@ -143,6 +122,42 @@ export class LastFMApiRequest<T> {
 		});
 
 		return result;
+	}
+
+	private getCallback(
+		method?: string | LastFMUnknownFunction,
+		callback?: LastFMUnknownFunction
+	): LastFMUnknownFunction | undefined {
+		return callback === undefined
+			? typeof method === 'function'
+				? method
+				: undefined
+			: typeof callback === 'function'
+			? callback
+			: undefined;
+	}
+
+	private getMethod(method?: string | LastFMUnknownFunction): string | LastFMUnknownFunction | undefined {
+		return typeof method === 'string' ? method : undefined;
+	}
+
+	private getOptions(method: string | LastFMUnknownFunction | undefined, params: string): RequestOptions {
+		const options: RequestOptions = {
+			hostname: 'ws.audioscrobbler.com',
+			path: '/2.0'
+		};
+
+		if (method === 'POST') {
+			options.method = 'POST';
+			options.headers = {
+				'Content-Length': Buffer.byteLength(params),
+				'Content-Type': 'application/x-www-form-urlencoded'
+			};
+		} else {
+			options.path += `?${params}`;
+		}
+
+		return options;
 	}
 }
 
