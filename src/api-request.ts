@@ -69,7 +69,7 @@ export class LastFMApiRequest<T> {
 		const paramsStr = stringify(paramsObj);
 		const options = this.getOptions(method, paramsStr);
 
-		const LastFMapiRequest = new Promise((resolve, reject) => {
+		const LastFMapiRequest = new Promise<string>((resolve, reject) => {
 			const httpRequest = request(options, httpResponse => {
 				let data = '';
 
@@ -86,17 +86,17 @@ export class LastFMApiRequest<T> {
 			}
 
 			httpRequest.end();
-		}).then(apiResponse => {
+		}).then((response: string) => {
 			let data;
 
 			try {
-				data = JSON.parse(apiResponse as string);
+				data = JSON.parse(response);
 			} catch (err) {
-				throw new Error('Unable to parse API response to JSON');
+				throw new Error(`lastfm-ts-api: Unable to parse LastFM API response to JSON. API response is ${err}`);
 			}
 
-			if (data.error) {
-				throw new Error(data.message);
+			if (data?.error) {
+				throw new Error(`lastfm-ts-api: ${data?.message ?? 'LastFM API returned an error.'}`);
 			}
 
 			return data;
