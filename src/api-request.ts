@@ -2,13 +2,7 @@ import { createHash } from 'crypto';
 import { parse, stringify } from 'querystring';
 import { request, RequestOptions } from 'https';
 
-export type LastFMParam = string | string[];
-export type LastFMParams<T> = Record<string, LastFMParam | T>;
-export type LastFMVoidOrNumber = void | number;
-export type LastFMBooleanNumber = 0 | 1;
-export type LastFMUnknownFunction = (...args: unknown[]) => unknown;
-export type LastFMRequestParams<T> = Record<string, LastFMParam | T>;
-export type LastFMBooleanNumberOrVoid = LastFMBooleanNumber | void;
+import { LastFMParams, LastFMUnknownFunction } from './types';
 
 export class LastFMApiRequest<T> {
 	private params: Map<string, any> = new Map();

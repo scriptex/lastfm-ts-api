@@ -1,140 +1,17 @@
 import { LastFM } from './base';
+import { LastFMApiRequest } from './api-request';
 import {
-	LastFMParam,
-	LastFMApiRequest,
-	LastFMBooleanNumber,
-	LastFMRequestParams,
 	LastFMUnknownFunction,
-	LastFMBooleanNumberOrVoid
-} from './api-request';
-
-export type LastFMAlbumParams = Readonly<{
-	album: string;
-	artist: string;
-}>;
-
-export type LastFMAlbumOptionalParams = Readonly<{
-	mbid?: string;
-	autocorrect?: LastFMBooleanNumber;
-}>;
-
-export type LastFMAlbumAddTagsParams = LastFMRequestParams<LastFMParam> &
-	LastFMAlbumParams &
-	Readonly<{
-		tags: string | string[];
-	}>;
-
-export type LastFMAlbumGetInfoParams = LastFMRequestParams<LastFMBooleanNumberOrVoid> &
-	LastFMAlbumParams &
-	LastFMAlbumOptionalParams &
-	Readonly<{
-		lang?: string;
-		username?: string;
-	}>;
-
-export type LastFMAlbumGetTagsParams = LastFMRequestParams<LastFMBooleanNumberOrVoid> &
-	LastFMAlbumParams &
-	LastFMAlbumOptionalParams &
-	Readonly<{
-		user?: string;
-	}>;
-
-export type LastFMAlbumGetTopTagsParams = LastFMRequestParams<LastFMBooleanNumberOrVoid> &
-	LastFMAlbumParams &
-	LastFMAlbumOptionalParams;
-
-export type LastFMAlbumRemoveLastFMTagParams = LastFMRequestParams<LastFMParam> &
-	LastFMAlbumParams &
-	Readonly<{
-		tag: string;
-	}>;
-
-export type LastFMAlbumSearchParams = LastFMRequestParams<number | void> &
-	Readonly<{
-		page?: number;
-		album: string;
-		limit?: number;
-	}>;
-
-export type LastFMAlbumGetInfoResponse = Readonly<{
-	album: {
-		artist: string;
-		mbid: string;
-		tags: {
-			tag: Array<{
-				url: string;
-				name: string;
-			}>;
-		};
-		playcount: string;
-		image: Array<{
-			size: string;
-			'#text': string;
-		}>;
-		tracks: {
-			track: Array<{
-				streamable: { fulltrack: string; '#text': string };
-				duration: number;
-				url: string;
-				name: string;
-				'@attr': {
-					rank: number;
-				};
-				artist: {
-					url: string;
-					name: string;
-					mbid: string;
-				};
-			}>;
-		};
-		url: string;
-		name: string;
-		listeners: string;
-		wiki: {
-			published: string;
-			summary: string;
-		};
-	};
-}>;
-
-export type LastFMAlbumGetTagsResponse = Readonly<{
-	tags: {
-		tag: Array<{
-			name: string;
-			url: string;
-		}>;
-	};
-}>;
-
-export type LastFMAlbumSearchResponse = Readonly<{
-	results: {
-		'opensearch:Query': {
-			'#text': string;
-			role: string;
-			searchTerms: string;
-			startPage: string;
-		};
-		'opensearch:totalResults': string;
-		'opensearch:startIndex': string;
-		'opensearch:itemsPerPage': string;
-		albummatches: {
-			album: Array<{
-				name: string;
-				artist: string;
-				url: string;
-				image: Array<{
-					'#text': string;
-					size: string;
-				}>;
-				streamable: LastFMBooleanNumber;
-				mbid: string;
-			}>;
-		};
-		'@attr': {
-			for: string;
-		};
-	};
-}>;
+	LastFMAlbumSearchParams,
+	LastFMAlbumAddTagsParams,
+	LastFMAlbumGetInfoParams,
+	LastFMAlbumGetTagsParams,
+	LastFMAlbumSearchResponse,
+	LastFMAlbumGetInfoResponse,
+	LastFMAlbumGetTagsResponse,
+	LastFMAlbumGetTopTagsParams,
+	LastFMAlbumRemoveLastFMTagParams
+} from './types';
 
 export class LastFMAlbum extends LastFM {
 	public addTags(params: LastFMAlbumAddTagsParams, callback?: LastFMUnknownFunction): Promise<void> {

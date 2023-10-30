@@ -1,79 +1,30 @@
+import LastFMApiRequest from './api-request';
 import { LastFM } from './base';
-import { LastFMParam, LastFMApiRequest, LastFMRequestParams, LastFMUnknownFunction } from './api-request';
-
-export interface LastFMArtistParams extends LastFMRequestParams<LastFMParam> {
-	readonly artist: string;
-}
-
-export interface LastFMArtistAddTagsParams extends LastFMRequestParams<LastFMParam>, LastFMArtistParams {
-	readonly tags: string | string[];
-}
-
-export interface LastFMArtistGetInfoParams extends LastFMRequestParams<0 | 1 | void> {
-	readonly lang?: string;
-	readonly mbid?: string;
-	readonly artist: string;
-	readonly username?: string;
-	readonly autocorrect?: 0 | 1;
-}
-
-export interface LastFMArtistGetSimilarParams extends LastFMRequestParams<0 | 1 | void | number> {
-	readonly mbid?: string;
-	readonly limit?: number;
-	readonly artist: string;
-	readonly autocorrect?: 0 | 1;
-}
-
-export interface LastFMArtistGetTagsParams extends LastFMRequestParams<0 | 1 | void> {
-	readonly mbid?: string;
-	readonly user?: string;
-	readonly artist: string;
-	readonly autocorrect?: 0 | 1;
-}
-
-export interface LastFMArtistGetTopAlbumsParams extends LastFMRequestParams<0 | 1 | void | number> {
-	readonly mbid?: string;
-	readonly page?: number;
-	readonly limit?: number;
-	readonly artist: string;
-	readonly autocorrect?: 0 | 1;
-}
-
-export interface LastFMArtistGetTopTagsParams extends LastFMRequestParams<0 | 1 | void> {
-	readonly mbid?: string;
-	readonly artist: string;
-	readonly autocorrect?: 0 | 1;
-}
-
-export interface LastFMArtistGetTopTracksParams extends LastFMRequestParams<0 | 1 | void | number> {
-	readonly mbid?: string;
-	readonly page?: number;
-	readonly limit?: number;
-	readonly artist: string;
-	readonly autocorrect?: 0 | 1;
-}
-
-export interface LastFMArtistRemoveLastFMTagParams extends LastFMRequestParams<LastFMParam> {
-	readonly tag: string;
-	readonly artist: string;
-}
-
-export interface LastFMArtistSearchParams extends LastFMRequestParams<number | void> {
-	readonly page?: number;
-	readonly limit?: number;
-	readonly artist: string;
-}
+import {
+	LastFMArtistParams,
+	LastFMUnknownFunction,
+	LastFMArtistSearchParams,
+	LastFMArtistAddTagsParams,
+	LastFMArtistGetInfoParams,
+	LastFMArtistGetTagsParams,
+	LastFMArtistSearchResponse,
+	LastFMArtistGetInfoResponse,
+	LastFMArtistGetTagsResponse,
+	LastFMArtistGetSimilarParams,
+	LastFMArtistGetTopTagsParams,
+	LastFMArtistGetSimilarResponse,
+	LastFMArtistGetTopAlbumsParams,
+	LastFMArtistGetTopTagsResponse,
+	LastFMArtistGetTopTracksParams,
+	LastFMArtistGetTopAlbumsResponse,
+	LastFMArtistGetTopTracksResponse,
+	LastFMArtistGetCorrectionResponse,
+	LastFMArtistRemoveLastFMTagParams
+} from './types';
 
 export class LastFMArtist extends LastFM {
-	constructor(apiKey: string, secret?: string, sessionKey?: string) {
-		super(apiKey, secret, sessionKey);
-	}
-
-	public addTags(
-		params: LastFMArtistAddTagsParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public addTags(params: LastFMArtistAddTagsParams, callback?: LastFMUnknownFunction): Promise<void> {
+		return new LastFMApiRequest<void>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -86,9 +37,9 @@ export class LastFMArtist extends LastFM {
 
 	public getCorrection(
 		params: LastFMArtistParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistGetCorrectionResponse> {
+		return new LastFMApiRequest<LastFMArtistGetCorrectionResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -99,9 +50,9 @@ export class LastFMArtist extends LastFM {
 
 	public getInfo(
 		params: LastFMArtistGetInfoParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistGetInfoResponse> {
+		return new LastFMApiRequest<LastFMArtistGetInfoResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -112,9 +63,9 @@ export class LastFMArtist extends LastFM {
 
 	public getSimilar(
 		params: LastFMArtistGetSimilarParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistGetSimilarResponse> {
+		return new LastFMApiRequest<LastFMArtistGetSimilarResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -125,9 +76,9 @@ export class LastFMArtist extends LastFM {
 
 	public getTags(
 		params: LastFMArtistGetTagsParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistGetTagsResponse> {
+		return new LastFMApiRequest<LastFMArtistGetTagsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -138,9 +89,9 @@ export class LastFMArtist extends LastFM {
 
 	public getTopAlbums(
 		params: LastFMArtistGetTopAlbumsParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistGetTopAlbumsResponse> {
+		return new LastFMApiRequest<LastFMArtistGetTopAlbumsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -151,9 +102,9 @@ export class LastFMArtist extends LastFM {
 
 	public getTopTags(
 		params: LastFMArtistGetTopTagsParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistGetTopTagsResponse> {
+		return new LastFMApiRequest<LastFMArtistGetTopTagsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -164,9 +115,9 @@ export class LastFMArtist extends LastFM {
 
 	public getTopTracks(
 		params: LastFMArtistGetTopTracksParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistGetTopTracksResponse> {
+		return new LastFMApiRequest<LastFMArtistGetTopTracksResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -175,11 +126,8 @@ export class LastFMArtist extends LastFM {
 			.send(callback);
 	}
 
-	public removeTag(
-		params: LastFMArtistRemoveLastFMTagParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public removeTag(params: LastFMArtistRemoveLastFMTagParams, callback?: LastFMUnknownFunction): Promise<void> {
+		return new LastFMApiRequest<void>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -190,8 +138,11 @@ export class LastFMArtist extends LastFM {
 			.send('POST', callback);
 	}
 
-	public search(params: LastFMArtistSearchParams, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public search(
+		params: LastFMArtistSearchParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMArtistSearchResponse> {
+		return new LastFMApiRequest<LastFMArtistSearchResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
