@@ -401,3 +401,26 @@ export type LastFMArtistSearchResponse = Readonly<{
 		};
 	};
 }>;
+
+export type LastFMAuthGetMobileSessionParams = LastFMRequestParams<LastFMParam> &
+	Readonly<{
+		username: string;
+		password: string;
+	}>;
+
+export type LastFMAuthGetSessionParams = LastFMRequestParams<LastFMParam> &
+	Readonly<{
+		token: string;
+	}>;
+
+export type LastFMAuthSessionResponse = Readonly<{
+	session: {
+		name: string;
+		key: string;
+		subscriber: LastFMBooleanNumber;
+	};
+}>;
+
+export type LastFMAuthGetTokenResponse = Readonly<{
+	token: string;
+}>;
