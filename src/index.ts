@@ -8,4 +8,5 @@ export * from './geo';
 export * from './library';
 export * from './tag';
 export * from './track';
+export * from './types';
 export * from './user';

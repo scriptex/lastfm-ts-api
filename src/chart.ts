@@ -1,18 +1,19 @@
 import { LastFM } from './base';
-import { LastFMApiRequest, LastFMRequestParams, LastFMUnknownFunction } from './api-request';
-
-export interface LastFMChartParams extends LastFMRequestParams<number | void> {
-	readonly page?: number;
-	readonly limit?: number;
-}
+import { LastFMApiRequest } from './api-request';
+import {
+	LastFMChartParams,
+	LastFMUnknownFunction,
+	LastFMChartGetTopTagsResponse,
+	LastFMChartGetTopTracksResponse,
+	LastFMChartGetTopArtistsResponse
+} from './types';
 
 export class LastFMChart extends LastFM {
-	constructor(apiKey: string, secret?: string, sessionKey?: string) {
-		super(apiKey, secret, sessionKey);
-	}
-
-	public getTopArtists(params: LastFMChartParams, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public getTopArtists(
+		params: LastFMChartParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMChartGetTopArtistsResponse> {
+		return new LastFMApiRequest<LastFMChartGetTopArtistsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -21,8 +22,11 @@ export class LastFMChart extends LastFM {
 			.send(callback);
 	}
 
-	public getTopTags(params: LastFMChartParams, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public getTopTags(
+		params: LastFMChartParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMChartGetTopTagsResponse> {
+		return new LastFMApiRequest<LastFMChartGetTopTagsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -31,8 +35,11 @@ export class LastFMChart extends LastFM {
 			.send(callback);
 	}
 
-	public getTopTracks(params: LastFMChartParams, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public getTopTracks(
+		params: LastFMChartParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMChartGetTopTracksResponse> {
+		return new LastFMApiRequest<LastFMChartGetTopTracksResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,

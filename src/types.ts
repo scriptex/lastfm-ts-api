@@ -424,3 +424,86 @@ export type LastFMAuthSessionResponse = Readonly<{
 export type LastFMAuthGetTokenResponse = Readonly<{
 	token: string;
 }>;
+
+export type LastFMChartParams = LastFMRequestParams<number | void> &
+	Readonly<{
+		page?: number;
+		limit?: number;
+	}>;
+
+export type LastFMChartGetTopArtistsResponse = Readonly<{
+	artists: {
+		artist: Array<{
+			name: string;
+			playcount: string;
+			listeners: string;
+			mbid: string;
+			url: string;
+			streamable: LastFMBooleanNumber;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+		}>;
+		'@attr': {
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMChartGetTopTagsResponse = Readonly<{
+	tags: {
+		tag: Array<{
+			name: string;
+			url: string;
+			reach: string;
+			taggings: string;
+			streamable: LastFMBooleanNumber;
+			wiki: {
+				published?: string;
+				summary?: string;
+			};
+		}>;
+		'@attr': {
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMChartGetTopTracksResponse = Readonly<{
+	tracks: {
+		track: Array<{
+			name: string;
+			duration: string;
+			playcount: string;
+			listeners: string;
+			mbid: string;
+			url: string;
+			streamable: {
+				'#text': string;
+				fulltrack: string;
+			};
+			artist: {
+				name: string;
+				mbid: string;
+				url: string;
+			};
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+		}>;
+		'@attr': {
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
