@@ -507,3 +507,73 @@ export type LastFMChartGetTopTracksResponse = Readonly<{
 		};
 	};
 }>;
+
+export type LastFMGeoGetTopArtistsParams = LastFMRequestParams<number | void> &
+	Readonly<{
+		page?: number;
+		limit?: number;
+		country: string;
+	}>;
+
+export type LastFMGeoGetTopTracksParams = LastFMGeoGetTopArtistsParams &
+	Readonly<{
+		location?: string;
+	}>;
+
+export type LastFMGeoGetTopArtistsResponse = Readonly<{
+	topartists: {
+		artist: Array<{
+			name: string;
+			listeners: string;
+			mbid: string;
+			url: string;
+			streamable: LastFMBooleanNumber;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+		}>;
+		'@attr': {
+			country: string;
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
+
+export type LastFMGeoGetTopTracksResponse = Readonly<{
+	tracks: {
+		track: Array<{
+			name: string;
+			duration: string;
+			listeners: string;
+			mbid: string;
+			url: string;
+			streamable: {
+				'#text': string;
+				fulltrack: string;
+			};
+			artist: {
+				name: string;
+				mbid: string;
+				url: string;
+			};
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			'@attr': {
+				rank: string;
+			};
+		}>;
+		'@attr': {
+			country: string;
+			page: string;
+			perPage: string;
+			totalPages: string;
+			total: string;
+		};
+	};
+}>;
