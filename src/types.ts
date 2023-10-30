@@ -577,3 +577,34 @@ export type LastFMGeoGetTopTracksResponse = Readonly<{
 		};
 	};
 }>;
+
+export type LastFMLibraryGetArtistsParams = LastFMRequestParams<number | void> &
+	Readonly<{
+		user: string;
+		page?: number;
+		limit?: number;
+	}>;
+
+export type LastFMLibraryGetArtistsResponse = Readonly<{
+	artists: {
+		artist: Array<{
+			tagcount: string;
+			image: Array<{
+				'#text': string;
+				size: string;
+			}>;
+			mbid: string;
+			url: string;
+			playcount: string;
+			name: string;
+			streamable: LastFMBooleanNumber;
+		}>;
+		'@attr': {
+			user: string;
+			totalPages: string;
+			page: string;
+			perPage: string;
+			total: string;
+		};
+	};
+}>;
