@@ -17,6 +17,7 @@
 	"author": "Atanas Atanasov <hi@atanas.info> (https://atanas.info)",
 	"funding": "https://github.com/sponsors/scriptex",
 	"main": "dist/index.js",
+	"type": "module",
 	"types": "dist/index.d.ts",
 	"repository": {
 		"type": "git",
@@ -24,7 +25,8 @@
 	},
 	"scripts": {
 		"watch": "tsc -w",
-		"build": "tsc"
+		"build": "tsc",
+		"demo": "node --experimental-modules --es-module-specifier-resolution=node demo/index.js"
 	},
 	"dependencies": {},
 	"devDependencies": {

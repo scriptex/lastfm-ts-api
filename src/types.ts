@@ -1073,7 +1073,7 @@ export type LastFMUserGetLovedTracksParams = LastFMUserParams & LastFMUserOption
 export type LastFMUserGetPersonalTagsParams = LastFMUserParams &
 	LastFMUserOptionalParams &
 	Readonly<{
-		tag?: string;
+		tag: string;
 		taggingtype: 'artist' | 'album' | 'track';
 	}>;
 
@@ -1082,7 +1082,7 @@ export type LastFMUserGetRecentTracksParams = LastFMUserParams &
 	Readonly<{
 		to?: string;
 		from?: string;
-		extended: 0 | 1;
+		extended?: 0 | 1;
 	}>;
 
 export type LastFMUserGetTopParams = LastFMUserParams &
