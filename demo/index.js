@@ -11,7 +11,7 @@ import {
 	LastFMTrack,
 	LastFMArtist,
 	LastFMLibrary
-} from '../dist';
+} from '../dist/index.js';
 
 config();
 

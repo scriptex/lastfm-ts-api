@@ -1,8 +1,8 @@
-import { createHash } from 'crypto';
-import { parse, stringify } from 'querystring';
-import { request, RequestOptions } from 'https';
+import { createHash } from 'node:crypto';
+import { parse, stringify } from 'node:querystring';
+import { request, RequestOptions } from 'node:https';
 
-import { LastFMParams, LastFMUnknownFunction } from './types';
+import { LastFMParams, LastFMUnknownFunction } from './types.js';
 
 export class LastFMApiRequest<T> {
 	private params: Map<string, any> = new Map();

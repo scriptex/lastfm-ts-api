@@ -1,5 +1,5 @@
-import { LastFM } from './base';
-import { LastFMApiRequest } from './api-request';
+import { LastFM } from './base.js';
+import { LastFMApiRequest } from './api-request.js';
 import {
 	LastFMUserParams,
 	LastFMUnknownFunction,
@@ -23,7 +23,7 @@ import {
 	LastFMUserGetWeeklyAlbumChartResponse,
 	LastFMUserGetWeeklyTrackChartResponse,
 	LastFMUserGetWeeklyArtistChartResponse
-} from './types';
+} from './types.js';
 
 export class LastFMUser extends LastFM {
 	public getFriends(

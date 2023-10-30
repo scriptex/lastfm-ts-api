@@ -1,5 +1,5 @@
-import { LastFM } from './base';
-import { LastFMApiRequest } from './api-request';
+import { LastFM } from './base.js';
+import { LastFMApiRequest } from './api-request.js';
 import {
 	LastFMTrackParams,
 	LastFMUnknownFunction,
@@ -20,7 +20,7 @@ import {
 	LastFMUpdateNowPlayingResponse,
 	LastFMTrackGetCorrectionResponse,
 	LastFMTrackUpdateNowPlayingParams
-} from './types';
+} from './types.js';
 
 export class LastFMTrack extends LastFM {
 	public addTags(params: LastFMTrackAddTagsParams, callback?: LastFMUnknownFunction): Promise<void> {

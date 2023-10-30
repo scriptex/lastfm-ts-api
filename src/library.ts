@@ -1,6 +1,6 @@
-import { LastFM } from './base';
-import { LastFMApiRequest } from './api-request';
-import { LastFMUnknownFunction, LastFMLibraryGetArtistsParams, LastFMLibraryGetArtistsResponse } from './types';
+import { LastFM } from './base.js';
+import { LastFMApiRequest } from './api-request.js';
+import { LastFMUnknownFunction, LastFMLibraryGetArtistsParams, LastFMLibraryGetArtistsResponse } from './types.js';
 
 export class LastFMLibrary extends LastFM {
 	public getArtists(

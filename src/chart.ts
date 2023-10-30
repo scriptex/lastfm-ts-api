@@ -1,12 +1,12 @@
-import { LastFM } from './base';
-import { LastFMApiRequest } from './api-request';
+import { LastFM } from './base.js';
+import { LastFMApiRequest } from './api-request.js';
 import {
 	LastFMChartParams,
 	LastFMUnknownFunction,
 	LastFMChartGetTopTagsResponse,
 	LastFMChartGetTopTracksResponse,
 	LastFMChartGetTopArtistsResponse
-} from './types';
+} from './types.js';
 
 export class LastFMChart extends LastFM {
 	public getTopArtists(

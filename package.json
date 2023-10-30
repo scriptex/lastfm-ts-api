@@ -26,7 +26,7 @@
 	"scripts": {
 		"watch": "tsc -w",
 		"build": "tsc",
-		"demo": "node --experimental-modules --es-module-specifier-resolution=node demo/index.js"
+		"demo": "node demo/index.js"
 	},
 	"dependencies": {},
 	"devDependencies": {
