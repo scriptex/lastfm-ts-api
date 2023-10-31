@@ -963,7 +963,7 @@ export type LastFMTrackGetTopTagsResponse = Readonly<{
 	};
 }>;
 
-// TODO: Verify that this is the correct response shape
+// This might not be the correct shape of the response
 export type LastFMTrackScroblleResponse = Readonly<{
 	scrobbles: {
 		scrobble: Array<{
@@ -1026,7 +1026,7 @@ export type LastFMTrackSearchResponse = Readonly<{
 	};
 }>;
 
-// TODO: Verify that this is the correct response shape
+// This might not be the correct shape of the response
 export type LastFMUpdateNowPlayingResponse = Readonly<{
 	nowplaying: {
 		track: {

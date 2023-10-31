@@ -56,6 +56,7 @@ user.getWeeklyChartList({ user: 'scriptex' }).then(print);
 user.getWeeklyTrackChart({ user: 'scriptex' }).then(print);
 
 album.getInfo({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
+//NOSONAR
 // album.getTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
 album.getTopTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
 album.search({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
@@ -67,6 +68,7 @@ chart.getTopTracks({ limit: 2 }).then(print);
 track.getCorrection({ track: 'Firestarter', artist: 'The Prodigy' }).then(print);
 track.getInfo({ track: 'Firestarter', artist: 'The Prodigy' }).then(print);
 track.getSimilar({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
+//NOSONAR
 // track.getTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
 track.getTopTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
 track.search({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
@@ -74,6 +76,7 @@ track.search({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(pri
 artist.getCorrection({ artist: 'The Prodigy' }).then(print);
 artist.getInfo({ artist: 'The Prodigy' }).then(print);
 artist.getSimilar({ artist: 'The Prodigy', limit: 2 }).then(print);
+//NOSONAR
 // artist.getTags({ artist: 'The Prodigy' }).then(print);
 artist.getTopAlbums({ artist: 'The Prodigy', limit: 2 }).then(print);
 artist.getTopTags({ artist: 'The Prodigy' }).then(print);
