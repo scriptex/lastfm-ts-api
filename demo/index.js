@@ -28,59 +28,62 @@ const library = new LastFMLibrary(API_KEY);
 
 const print = r => console.log(JSON.stringify(r, null, 2));
 
-geo.getTopArtists({ country: 'Bulgaria', limit: 2 }).then(print);
-geo.getTopTracks({ country: 'Bulgaria', limit: 2 }).then(print);
+geo.getTopArtists({ country: 'Bulgaria', limit: 2 }).then(print).catch(console.error);
+geo.getTopTracks({ country: 'Bulgaria', limit: 2 }).then(print).catch(console.error);
 
-tag.getInfo({ tag: 'techno', limit: 2 }).then(print);
-tag.getSimilar({ tag: 'techno', limit: 2 }).then(print);
-tag.getTopAlbums({ tag: 'techno', limit: 2 }).then(print);
-tag.getTopArtists({ tag: 'techno', limit: 2 }).then(print);
-tag.getTopTags().then(print);
-tag.getTopTracks({ tag: 'techno', limit: 2 }).then(print);
-tag.getWeeklyChartList({ tag: 'techno' }).then(print);
+tag.getInfo({ tag: 'techno', limit: 2 }).then(print).catch(console.error);
+tag.getSimilar({ tag: 'techno', limit: 2 }).then(print).catch(console.error);
+tag.getTopAlbums({ tag: 'techno', limit: 2 }).then(print).catch(console.error);
+tag.getTopArtists({ tag: 'techno', limit: 2 }).then(print).catch(console.error);
+tag.getTopTags().then(print).catch(console.error);
+tag.getTopTracks({ tag: 'techno', limit: 2 }).then(print).catch(console.error);
+tag.getWeeklyChartList({ tag: 'techno' }).then(print).catch(console.error);
 
-user.getFriends({ user: 'scriptex', limit: 2 }).then(print);
-user.getInfo({ user: 'scriptex' }).then(print);
-user.getLovedTracks({ user: 'scriptex', limit: 2 }).then(print);
-user.getPersonalTags({ user: 'scriptex', taggingtype: 'album', tag: 'techno', limit: 2 }).then(print);
-user.getPersonalTags({ user: 'scriptex', taggingtype: 'artist', tag: 'techno', limit: 2 }).then(print);
-user.getPersonalTags({ user: 'scriptex', taggingtype: 'track', tag: 'techno', limit: 2 }).then(print);
-user.getRecentTracks({ user: 'scriptex', limit: 2 }).then(print);
-user.getTopAlbums({ user: 'scriptex', limit: 2 }).then(print);
-user.getTopArtists({ user: 'scriptex', limit: 2 }).then(print);
-user.getTopTags({ user: 'scriptex', limit: 2 }).then(print);
-user.getTopTracks({ user: 'scriptex', limit: 2 }).then(print);
-user.getWeeklyAlbumChart({ user: 'scriptex', limit: 2 }).then(print);
-user.getWeeklyArtistChart({ user: 'scriptex', limit: 2 }).then(print);
-user.getWeeklyChartList({ user: 'scriptex' }).then(print);
-user.getWeeklyTrackChart({ user: 'scriptex' }).then(print);
+user.getFriends({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getInfo({ user: 'scriptex' }).then(print).catch(console.error);
+user.getLovedTracks({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getPersonalTags({ user: 'scriptex', taggingtype: 'album', tag: 'techno', limit: 2 })
+	.then(print)
+	.catch(console.error);
+user.getPersonalTags({ user: 'scriptex', taggingtype: 'artist', tag: 'techno', limit: 2 })
+	.then(print)
+	.catch(console.error);
+user.getPersonalTags({ user: 'scriptex', taggingtype: 'track', tag: 'techno', limit: 2 })
+	.then(print)
+	.catch(console.error);
+user.getRecentTracks({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getTopAlbums({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getTopArtists({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getTopTags({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getTopTracks({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getWeeklyAlbumChart({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getWeeklyArtistChart({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
+user.getWeeklyChartList({ user: 'scriptex' }).then(print).catch(console.error);
+user.getWeeklyTrackChart({ user: 'scriptex' }).then(print).catch(console.error);
 
-album.getInfo({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
-//NOSONAR
-// album.getTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
-album.getTopTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
-album.search({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print);
+album.getInfo({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print).catch(console.error);
+album.getTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print).catch(console.error);
+album.getTopTags({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print).catch(console.error);
+album.search({ album: 'The Fat of The Land', artist: 'The Prodigy' }).then(print).catch(console.error);
 
-chart.getTopArtists({ limit: 2 }).then(print);
-chart.getTopTags({ limit: 2 }).then(print);
-chart.getTopTracks({ limit: 2 }).then(print);
+chart.getTopArtists({ limit: 2 }).then(print).catch(console.error);
+chart.getTopTags({ limit: 2 }).then(print).catch(console.error);
+chart.getTopTracks({ limit: 2 }).then(print).catch(console.error);
 
-track.getCorrection({ track: 'Firestarter', artist: 'The Prodigy' }).then(print);
-track.getInfo({ track: 'Firestarter', artist: 'The Prodigy' }).then(print);
-track.getSimilar({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
-//NOSONAR
-// track.getTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
-track.getTopTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
-track.search({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print);
+track.getCorrection({ track: 'Firestarter', artist: 'The Prodigy' }).then(print).catch(console.error);
+track.getInfo({ track: 'Firestarter', artist: 'The Prodigy' }).then(print).catch(console.error);
+track.getSimilar({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
+track.getTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
+track.getTopTags({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
+track.search({ track: 'Firestarter', artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
 
-artist.getCorrection({ artist: 'The Prodigy' }).then(print);
-artist.getInfo({ artist: 'The Prodigy' }).then(print);
-artist.getSimilar({ artist: 'The Prodigy', limit: 2 }).then(print);
-//NOSONAR
-// artist.getTags({ artist: 'The Prodigy' }).then(print);
-artist.getTopAlbums({ artist: 'The Prodigy', limit: 2 }).then(print);
-artist.getTopTags({ artist: 'The Prodigy' }).then(print);
-artist.getTopTracks({ artist: 'The Prodigy', limit: 2 }).then(print);
-artist.search({ artist: 'The Prodigy', limit: 2 }).then(print);
+artist.getCorrection({ artist: 'The Prodigy' }).then(print).catch(console.error);
+artist.getInfo({ artist: 'The Prodigy' }).then(print).catch(console.error);
+artist.getSimilar({ artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
+artist.getTags({ artist: 'The Prodigy' }).then(print).catch(console.error);
+artist.getTopAlbums({ artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
+artist.getTopTags({ artist: 'The Prodigy' }).then(print).catch(console.error);
+artist.getTopTracks({ artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
+artist.search({ artist: 'The Prodigy', limit: 2 }).then(print).catch(console.error);
 
-library.getArtists({ user: 'scriptex', limit: 2 }).then(print);
+library.getArtists({ user: 'scriptex', limit: 2 }).then(print).catch(console.error);
