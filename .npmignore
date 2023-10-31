@@ -21,6 +21,9 @@ Thumbs.db
 .github
 _config.yml
 _.config.yml
+.codebeatsettings
+.env
+.env.example
 .editorconfig
 .gitattributes
 .gitignore
@@ -37,3 +40,4 @@ tslint.json
 yarn.lock
 
 !dist
+demo

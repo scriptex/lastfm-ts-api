@@ -1,20 +1,17 @@
-import { createHash } from 'crypto';
-import { parse, stringify } from 'querystring';
-import { request, RequestOptions } from 'https';
+import { createHash } from 'node:crypto';
+import { parse, stringify } from 'node:querystring';
+import { request, RequestOptions } from 'node:https';
 
-export type LastFMUnknownFunction = (...args: unknown[]) => unknown;
-export type LastFMParam = string | string[];
-export type LastFMParams<T> = Record<string, LastFMParam | T>;
-export type LastFMRequestParams<T> = Record<string, LastFMParam | T>;
+import { LastFMParams, LastFMUnknownFunction } from './types.js';
 
-export class LastFMApiRequest {
+export class LastFMApiRequest<T> {
 	private params: Map<string, any> = new Map();
 
 	constructor() {
 		this.params.set('format', 'json');
 	}
 
-	public set<T>(params: LastFMParams<void | T>): LastFMApiRequest {
+	public set<P>(params: LastFMParams<void | P>): this {
 		Object.entries(params).forEach(([key, value]) => {
 			if (typeof value !== 'undefined') {
 				this.params.set(key, value);
@@ -24,7 +21,7 @@ export class LastFMApiRequest {
 		return this;
 	}
 
-	public sign(secret?: string): LastFMApiRequest {
+	public sign(secret?: string): this {
 		const paramsObj: LastFMParams<string> = this.setParams();
 		const paramsObjParsed = parse(stringify(paramsObj));
 
@@ -59,19 +56,10 @@ export class LastFMApiRequest {
 		return this;
 	}
 
-	public send(
-		method?: string | LastFMUnknownFunction,
-		callback?: LastFMUnknownFunction
-	): void | Promise<LastFMApiRequest> {
-		callback =
-			callback === undefined
-				? typeof method === 'function'
-					? method
-					: undefined
-				: typeof callback === 'function'
-				? callback
-				: undefined;
-		method = typeof method === 'string' ? method : undefined;
+	public send(method?: string | LastFMUnknownFunction, callback?: LastFMUnknownFunction): Promise<T> {
+		callback = this.getCallback(method, callback);
+
+		method = this.getMethod(method);
 
 		if (this.params.has('callback')) {
 			this.params.delete('callback');
@@ -79,23 +67,9 @@ export class LastFMApiRequest {
 
 		const paramsObj: LastFMParams<string> = this.setParams();
 		const paramsStr = stringify(paramsObj);
+		const options = this.getOptions(method, paramsStr);
 
-		const options: RequestOptions = {
-			hostname: 'ws.audioscrobbler.com',
-			path: '/2.0'
-		};
-
-		if (method === 'POST') {
-			options.method = 'POST';
-			options.headers = {
-				'Content-Length': Buffer.byteLength(paramsStr),
-				'Content-Type': 'application/x-www-form-urlencoded'
-			};
-		} else {
-			options.path += `?${paramsStr}`;
-		}
-
-		const LastFMapiRequest = new Promise((resolve, reject) => {
+		const LastFMapiRequest = new Promise<string>((resolve, reject) => {
 			const httpRequest = request(options, httpResponse => {
 				let data = '';
 
@@ -112,29 +86,27 @@ export class LastFMApiRequest {
 			}
 
 			httpRequest.end();
-		}).then(apiResponse => {
+		}).then((response: string) => {
 			let data;
 
 			try {
-				data = JSON.parse(apiResponse as string);
+				data = JSON.parse(response);
 			} catch (err) {
-				throw new Error('Unable to parse API response to JSON');
+				throw new Error(`lastfm-ts-api: Unable to parse LastFM API response to JSON. API response is ${err}`);
 			}
 
-			if (data.error) {
-				throw new Error(data.message);
+			if (data?.error) {
+				throw new Error(`lastfm-ts-api: ${data?.message ?? 'LastFM API returned an error.'}`);
 			}
 
 			return data;
 		});
 
 		if (callback && typeof callback === 'function') {
-			LastFMapiRequest.then(
+			return LastFMapiRequest.then(
 				data => callback!(null, data),
 				err => callback!(err, null)
-			);
-
-			return undefined;
+			) as typeof LastFMapiRequest;
 		}
 
 		return LastFMapiRequest;
@@ -150,6 +122,42 @@ export class LastFMApiRequest {
 		});
 
 		return result;
+	}
+
+	private getCallback(
+		method?: string | LastFMUnknownFunction,
+		callback?: LastFMUnknownFunction
+	): LastFMUnknownFunction | undefined {
+		return callback === undefined
+			? typeof method === 'function'
+				? method
+				: undefined
+			: typeof callback === 'function'
+			? callback
+			: undefined;
+	}
+
+	private getMethod(method?: string | LastFMUnknownFunction): string | LastFMUnknownFunction | undefined {
+		return typeof method === 'string' ? method : undefined;
+	}
+
+	private getOptions(method: string | LastFMUnknownFunction | undefined, params: string): RequestOptions {
+		const options: RequestOptions = {
+			hostname: 'ws.audioscrobbler.com',
+			path: '/2.0'
+		};
+
+		if (method === 'POST') {
+			options.method = 'POST';
+			options.headers = {
+				'Content-Length': Buffer.byteLength(params),
+				'Content-Type': 'application/x-www-form-urlencoded'
+			};
+		} else {
+			options.path += `?${params}`;
+		}
+
+		return options;
 	}
 }
 

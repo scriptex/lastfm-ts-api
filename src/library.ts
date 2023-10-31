@@ -1,22 +1,13 @@
-import { LastFM } from './base';
-import { LastFMApiRequest, LastFMRequestParams, LastFMUnknownFunction } from './api-request';
-
-export interface LastFMLibraryGetArtists extends LastFMRequestParams<number | void> {
-	readonly user: string;
-	readonly page?: number;
-	readonly limit?: number;
-}
+import { LastFM } from './base.js';
+import { LastFMApiRequest } from './api-request.js';
+import { LastFMUnknownFunction, LastFMLibraryGetArtistsParams, LastFMLibraryGetArtistsResponse } from './types.js';
 
 export class LastFMLibrary extends LastFM {
-	constructor(apiKey: string, secret?: string, sessionKey?: string) {
-		super(apiKey, secret, sessionKey);
-	}
-
 	public getArtists(
-		params: LastFMLibraryGetArtists,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		params: LastFMLibraryGetArtistsParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMLibraryGetArtistsResponse> {
+		return new LastFMApiRequest<LastFMLibraryGetArtistsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,

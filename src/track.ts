@@ -1,73 +1,30 @@
-import { LastFM } from './base';
-import { LastFMApiRequest, LastFMRequestParams, LastFMUnknownFunction } from './api-request';
-
-export interface LastFMTrackParams extends LastFMRequestParams<number | void> {
-	readonly track: string;
-	readonly artist: string;
-}
-
-export interface LastFMTrackOptionalParams {
-	readonly mbid?: string;
-	readonly autocorrect?: 0 | 1;
-}
-
-export interface LastFMTrackAddTags extends LastFMTrackParams {
-	readonly tags: string | string[];
-}
-
-export interface LastFMTrackGetInfo extends LastFMTrackParams, LastFMTrackOptionalParams {
-	readonly username?: string;
-}
-
-export interface LastFMTrackGetSimilar extends LastFMTrackParams, LastFMTrackOptionalParams {
-	readonly limit?: number;
-}
-
-export interface LastFMTrackGetTags extends LastFMTrackParams, LastFMTrackOptionalParams {
-	readonly user?: string;
-}
-
-export interface LastFMTrackGetTopTags extends LastFMTrackParams, LastFMTrackOptionalParams {}
-
-export interface LastFMTrackRemoveTag extends LastFMTrackParams {
-	readonly tag: string;
-}
-
-export interface LastFMTrackScrobble extends LastFMTrackParams {
-	readonly timestamp?: number;
-	readonly mbid?: string;
-	readonly album?: string;
-	readonly context?: string;
-	readonly streamId?: string;
-	readonly duration?: number;
-	readonly chosenByUser?: 0 | 1;
-	readonly trackNumber?: number;
-	readonly albumArtist?: string;
-}
-
-export interface LastFMTrackSearch extends LastFMRequestParams<number | void> {
-	readonly page?: number;
-	readonly limit?: number;
-	readonly track: string;
-	readonly artist?: string;
-}
-
-export interface LastFMTrackUpdateNowPlaying extends LastFMTrackParams {
-	readonly mbid?: string;
-	readonly album?: string;
-	readonly context?: string;
-	readonly duration?: number;
-	readonly trackNumber?: number;
-	readonly albumArtist?: string;
-}
+import { LastFM } from './base.js';
+import { LastFMApiRequest } from './api-request.js';
+import {
+	LastFMTrackParams,
+	LastFMUnknownFunction,
+	LastFMTrackSearchParams,
+	LastFMTrackAddTagsParams,
+	LastFMTrackGetInfoParams,
+	LastFMTrackGetTagsParams,
+	LastFMTrackScrobbleParams,
+	LastFMTrackSearchResponse,
+	LastFMTrackGetInfoResponse,
+	LastFMTrackGetTagsResponse,
+	LastFMTrackRemoveTagParams,
+	LastFMTrackGetSimilarParams,
+	LastFMTrackGetTopTagsParams,
+	LastFMTrackScroblleResponse,
+	LastFMTrackGetSimilarResponse,
+	LastFMTrackGetTopTagsResponse,
+	LastFMUpdateNowPlayingResponse,
+	LastFMTrackGetCorrectionResponse,
+	LastFMTrackUpdateNowPlayingParams
+} from './types.js';
 
 export class LastFMTrack extends LastFM {
-	constructor(apiKey: string, secret?: string, sessionKey?: string) {
-		super(apiKey, secret, sessionKey);
-	}
-
-	public addTags(params: LastFMTrackAddTags, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public addTags(params: LastFMTrackAddTagsParams, callback?: LastFMUnknownFunction): Promise<void> {
+		return new LastFMApiRequest<void>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -78,8 +35,11 @@ export class LastFMTrack extends LastFM {
 			.send('POST', callback);
 	}
 
-	public getCorrection(params: LastFMTrackParams, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public getCorrection(
+		params: LastFMTrackParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackGetCorrectionResponse> {
+		return new LastFMApiRequest<LastFMTrackGetCorrectionResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -88,8 +48,11 @@ export class LastFMTrack extends LastFM {
 			.send(callback);
 	}
 
-	public getInfo(params: LastFMTrackGetInfo, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public getInfo(
+		params: LastFMTrackGetInfoParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackGetInfoResponse> {
+		return new LastFMApiRequest<LastFMTrackGetInfoResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -99,10 +62,10 @@ export class LastFMTrack extends LastFM {
 	}
 
 	public getSimilar(
-		params: LastFMTrackGetSimilar,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		params: LastFMTrackGetSimilarParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackGetSimilarResponse> {
+		return new LastFMApiRequest<LastFMTrackGetSimilarResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -111,8 +74,11 @@ export class LastFMTrack extends LastFM {
 			.send(callback);
 	}
 
-	public getTags(params: LastFMTrackGetTags, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public getTags(
+		params: LastFMTrackGetTagsParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackGetTagsResponse> {
+		return new LastFMApiRequest<LastFMTrackGetTagsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -122,10 +88,10 @@ export class LastFMTrack extends LastFM {
 	}
 
 	public getTopTags(
-		params: LastFMTrackGetTopTags,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		params: LastFMTrackGetTopTagsParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackGetTopTagsResponse> {
+		return new LastFMApiRequest<LastFMTrackGetTopTagsResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -134,8 +100,8 @@ export class LastFMTrack extends LastFM {
 			.send(callback);
 	}
 
-	public love(params: LastFMTrackParams, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public love(params: LastFMTrackParams, callback?: LastFMUnknownFunction): Promise<void> {
+		return new LastFMApiRequest<void>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -146,8 +112,8 @@ export class LastFMTrack extends LastFM {
 			.send('POST', callback);
 	}
 
-	public removeTag(params: LastFMTrackRemoveTag, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public removeTag(params: LastFMTrackRemoveTagParams, callback?: LastFMUnknownFunction): Promise<void> {
+		return new LastFMApiRequest<void>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -158,8 +124,11 @@ export class LastFMTrack extends LastFM {
 			.send('POST', callback);
 	}
 
-	public scrobble(params: LastFMTrackScrobble, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public scrobble(
+		params: LastFMTrackScrobbleParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackScroblleResponse> {
+		return new LastFMApiRequest<LastFMTrackScroblleResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -171,12 +140,12 @@ export class LastFMTrack extends LastFM {
 	}
 
 	public scrobbleMany(
-		paramsArr: LastFMTrackScrobble[],
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		const params: any = {};
+		paramsArr: LastFMTrackScrobbleParams[],
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackScroblleResponse> {
+		const params: LastFMTrackScrobbleParams = {} as LastFMTrackScrobbleParams;
 
-		paramsArr.forEach((paramsObj: LastFMTrackScrobble, i: number) =>
+		paramsArr.forEach((paramsObj: LastFMTrackScrobbleParams, i: number) =>
 			Object.entries(paramsObj).forEach(
 				([name, value]: [name: string, value: string | string[] | number | void]) =>
 					(params[`${name}[${i}]`] = value)
@@ -186,8 +155,11 @@ export class LastFMTrack extends LastFM {
 		return this.scrobble(params, callback);
 	}
 
-	public search(params: LastFMTrackSearch, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public search(
+		params: LastFMTrackSearchParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMTrackSearchResponse> {
+		return new LastFMApiRequest<LastFMTrackSearchResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -196,8 +168,8 @@ export class LastFMTrack extends LastFM {
 			.send(callback);
 	}
 
-	public unlove(params: LastFMTrackParams, callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public unlove(params: LastFMTrackParams, callback?: LastFMUnknownFunction): Promise<void> {
+		return new LastFMApiRequest<void>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -209,10 +181,10 @@ export class LastFMTrack extends LastFM {
 	}
 
 	public updateNowPlaying(
-		params: LastFMTrackUpdateNowPlaying,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		params: LastFMTrackUpdateNowPlayingParams,
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMUpdateNowPlayingResponse> {
+		return new LastFMApiRequest<LastFMUpdateNowPlayingResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,

@@ -1,25 +1,19 @@
-import { LastFM } from './base';
-import { LastFMParam, LastFMApiRequest, LastFMRequestParams, LastFMUnknownFunction } from './api-request';
-
-export interface LastFMAuthGetMobileSessionParams extends LastFMRequestParams<LastFMParam> {
-	readonly username: string;
-	readonly password: string;
-}
-
-export interface LastFMAuthGetSessionParams extends LastFMRequestParams<LastFMParam> {
-	readonly token: string;
-}
+import { LastFM } from './base.js';
+import { LastFMApiRequest } from './api-request.js';
+import {
+	LastFMUnknownFunction,
+	LastFMAuthSessionResponse,
+	LastFMAuthGetSessionParams,
+	LastFMAuthGetTokenResponse,
+	LastFMAuthGetMobileSessionParams
+} from './types.js';
 
 export class LastFMAuth extends LastFM {
-	constructor(apiKey: string, secret?: string, sessionKey?: string) {
-		super(apiKey, secret, sessionKey);
-	}
-
 	public getMobileSession(
 		params: LastFMAuthGetMobileSessionParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMAuthSessionResponse> {
+		return new LastFMApiRequest<LastFMAuthSessionResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -31,9 +25,9 @@ export class LastFMAuth extends LastFM {
 
 	public getSession(
 		params: LastFMAuthGetSessionParams,
-		callback: LastFMUnknownFunction
-	): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+		callback?: LastFMUnknownFunction
+	): Promise<LastFMAuthSessionResponse> {
+		return new LastFMApiRequest<LastFMAuthSessionResponse>()
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -43,8 +37,8 @@ export class LastFMAuth extends LastFM {
 			.send(callback);
 	}
 
-	public getToken(callback: LastFMUnknownFunction): Promise<LastFMApiRequest> | void {
-		return new LastFMApiRequest()
+	public getToken(callback?: LastFMUnknownFunction): Promise<LastFMAuthGetTokenResponse> {
+		return new LastFMApiRequest<LastFMAuthGetTokenResponse>()
 			.set({
 				api_key: this.apiKey,
 				method: 'auth.getToken'
