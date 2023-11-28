@@ -1244,6 +1244,9 @@ export type LastFMUserGetRecentTracksResponse = Readonly<{
 				uts: string;
 				'#text': string;
 			};
+			'@attr'?: {
+				nowplaying: "true"
+			};
 		}>;
 		'@attr': {
 			user: string;
