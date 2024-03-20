@@ -33,6 +33,6 @@
 		"@types/node": "20.11.30",
 		"dotenv": "16.4.5",
 		"tslib": "2.6.2",
-		"typescript": "5.4.2"
+		"typescript": "5.4.3"
 	}
 }
