@@ -30,7 +30,7 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@types/node": "20.14.13",
+		"@types/node": "20.14.14",
 		"dotenv": "16.4.5",
 		"tslib": "2.6.3",
 		"typescript": "5.5.4"
