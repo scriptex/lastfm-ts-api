@@ -44,8 +44,10 @@ export class LastFMUser extends LastFM {
 			.set(params)
 			.set({
 				api_key: this.apiKey,
-				method: 'user.getInfo'
+				method: 'user.getInfo',
+				sk: this.sessionKey
 			})
+			.sign(this.secret)
 			.send(callback);
 	}
 
