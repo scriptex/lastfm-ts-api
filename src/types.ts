@@ -1054,7 +1054,7 @@ export type LastFMUpdateNowPlayingResponse = Readonly<{
 
 export type LastFMUserParams = LastFMRequestParams<LastFMParam | number | void | boolean> &
 	Readonly<{
-		user: string;
+		user?: string;
 	}>;
 
 export type LastFMUserOptionalParams = Readonly<{
@@ -1245,7 +1245,7 @@ export type LastFMUserGetRecentTracksResponse = Readonly<{
 				'#text': string;
 			};
 			'@attr'?: {
-				nowplaying: "true"
+				nowplaying: 'true';
 			};
 		}>;
 		'@attr': {
