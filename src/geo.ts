@@ -13,7 +13,7 @@ export class LastFMGeo extends LastFM {
 		params: LastFMGeoGetTopArtistsParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMGeoGetTopArtistsResponse> {
-		return new LastFMApiRequest<LastFMGeoGetTopArtistsResponse>()
+		return new LastFMApiRequest<LastFMGeoGetTopArtistsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -26,7 +26,7 @@ export class LastFMGeo extends LastFM {
 		params: LastFMGeoGetTopTracksParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMGeoGetTopTracksResponse> {
-		return new LastFMApiRequest<LastFMGeoGetTopTracksResponse>()
+		return new LastFMApiRequest<LastFMGeoGetTopTracksResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,

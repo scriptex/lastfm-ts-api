@@ -1443,3 +1443,8 @@ export type LastFMUserGetWeeklyTrackChartResponse = Readonly<{
 		};
 	};
 }>;
+
+export type OptionalConfig = {
+	hostname: string;
+	path: string;
+};

@@ -100,6 +100,33 @@ user.getRecentTracks({
 });
 ```
 
+## Support for other scrobbling platforms
+
+It is possible to use other scrobbling platforms which implement the same API and/or are compatible with Last.FM. For example - [Libre.FM](https://libre.fm).
+
+In order to interact with Libre.FM's API you must supply an additional parameter to the classes above. This additional parameter is an object containing two properties - `hostname` and `path`.
+
+```json
+{
+	"hostname": "turtle.libre.fm",
+	"path": "/2.0"
+}
+```
+
+You can use it like this:
+
+```ts
+// To interact with the Track API:
+import { LastFMTrack } from 'lastfm-ts-api';
+
+const track = new LastFMTrack('API_KEY', 'SECRET', 'SESSION_KEY', {
+    hostname: 'turtle.libre.fm'
+	path: '/2.0'
+});
+```
+
+**Note:** In order to interact with another scrobbling platform you need to supply an API key for that platform.
+
 ## LICENSE
 
 MIT
