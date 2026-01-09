@@ -24,7 +24,7 @@ import {
 
 export class LastFMTrack extends LastFM {
 	public addTags(params: LastFMTrackAddTagsParams, callback?: LastFMUnknownFunction): Promise<void> {
-		return new LastFMApiRequest<void>()
+		return new LastFMApiRequest<void>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -39,7 +39,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTrackGetCorrectionResponse> {
-		return new LastFMApiRequest<LastFMTrackGetCorrectionResponse>()
+		return new LastFMApiRequest<LastFMTrackGetCorrectionResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -52,7 +52,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackGetInfoParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTrackGetInfoResponse> {
-		return new LastFMApiRequest<LastFMTrackGetInfoResponse>()
+		return new LastFMApiRequest<LastFMTrackGetInfoResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -65,7 +65,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackGetSimilarParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTrackGetSimilarResponse> {
-		return new LastFMApiRequest<LastFMTrackGetSimilarResponse>()
+		return new LastFMApiRequest<LastFMTrackGetSimilarResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -78,7 +78,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackGetTagsParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTrackGetTagsResponse> {
-		return new LastFMApiRequest<LastFMTrackGetTagsResponse>()
+		return new LastFMApiRequest<LastFMTrackGetTagsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -91,7 +91,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackGetTopTagsParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTrackGetTopTagsResponse> {
-		return new LastFMApiRequest<LastFMTrackGetTopTagsResponse>()
+		return new LastFMApiRequest<LastFMTrackGetTopTagsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -101,7 +101,7 @@ export class LastFMTrack extends LastFM {
 	}
 
 	public love(params: LastFMTrackParams, callback?: LastFMUnknownFunction): Promise<void> {
-		return new LastFMApiRequest<void>()
+		return new LastFMApiRequest<void>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -113,7 +113,7 @@ export class LastFMTrack extends LastFM {
 	}
 
 	public removeTag(params: LastFMTrackRemoveTagParams, callback?: LastFMUnknownFunction): Promise<void> {
-		return new LastFMApiRequest<void>()
+		return new LastFMApiRequest<void>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -128,7 +128,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackScrobbleParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTrackScroblleResponse> {
-		return new LastFMApiRequest<LastFMTrackScroblleResponse>()
+		return new LastFMApiRequest<LastFMTrackScroblleResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -159,7 +159,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackSearchParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTrackSearchResponse> {
-		return new LastFMApiRequest<LastFMTrackSearchResponse>()
+		return new LastFMApiRequest<LastFMTrackSearchResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -169,7 +169,7 @@ export class LastFMTrack extends LastFM {
 	}
 
 	public unlove(params: LastFMTrackParams, callback?: LastFMUnknownFunction): Promise<void> {
-		return new LastFMApiRequest<void>()
+		return new LastFMApiRequest<void>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -184,7 +184,7 @@ export class LastFMTrack extends LastFM {
 		params: LastFMTrackUpdateNowPlayingParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMUpdateNowPlayingResponse> {
-		return new LastFMApiRequest<LastFMUpdateNowPlayingResponse>()
+		return new LastFMApiRequest<LastFMUpdateNowPlayingResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,

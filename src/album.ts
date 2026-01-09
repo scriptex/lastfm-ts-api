@@ -15,7 +15,7 @@ import {
 
 export class LastFMAlbum extends LastFM {
 	public addTags(params: LastFMAlbumAddTagsParams, callback?: LastFMUnknownFunction): Promise<void> {
-		return new LastFMApiRequest<void>()
+		return new LastFMApiRequest<void>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -30,7 +30,7 @@ export class LastFMAlbum extends LastFM {
 		params: LastFMAlbumGetInfoParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMAlbumGetInfoResponse> {
-		return new LastFMApiRequest<LastFMAlbumGetInfoResponse>()
+		return new LastFMApiRequest<LastFMAlbumGetInfoResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -43,7 +43,7 @@ export class LastFMAlbum extends LastFM {
 		params: LastFMAlbumGetTagsParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMAlbumGetTagsResponse> {
-		return new LastFMApiRequest<LastFMAlbumGetTagsResponse>()
+		return new LastFMApiRequest<LastFMAlbumGetTagsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -56,7 +56,7 @@ export class LastFMAlbum extends LastFM {
 		params: LastFMAlbumGetTopTagsParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMAlbumGetTagsResponse> {
-		return new LastFMApiRequest<LastFMAlbumGetTagsResponse>()
+		return new LastFMApiRequest<LastFMAlbumGetTagsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -66,7 +66,7 @@ export class LastFMAlbum extends LastFM {
 	}
 
 	public removeTag(params: LastFMAlbumRemoveLastFMTagParams, callback?: LastFMUnknownFunction): Promise<void> {
-		return new LastFMApiRequest<void>()
+		return new LastFMApiRequest<void>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -81,7 +81,7 @@ export class LastFMAlbum extends LastFM {
 		params: LastFMAlbumSearchParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMAlbumSearchResponse> {
-		return new LastFMApiRequest<LastFMAlbumSearchResponse>()
+		return new LastFMApiRequest<LastFMAlbumSearchResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,

@@ -13,7 +13,7 @@ export class LastFMChart extends LastFM {
 		params: LastFMChartParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMChartGetTopArtistsResponse> {
-		return new LastFMApiRequest<LastFMChartGetTopArtistsResponse>()
+		return new LastFMApiRequest<LastFMChartGetTopArtistsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -26,7 +26,7 @@ export class LastFMChart extends LastFM {
 		params: LastFMChartParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMChartGetTopTagsResponse> {
-		return new LastFMApiRequest<LastFMChartGetTopTagsResponse>()
+		return new LastFMApiRequest<LastFMChartGetTopTagsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -39,7 +39,7 @@ export class LastFMChart extends LastFM {
 		params: LastFMChartParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMChartGetTopTracksResponse> {
-		return new LastFMApiRequest<LastFMChartGetTopTracksResponse>()
+		return new LastFMApiRequest<LastFMChartGetTopTracksResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,

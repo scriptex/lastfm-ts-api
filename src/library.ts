@@ -7,7 +7,7 @@ export class LastFMLibrary extends LastFM {
 		params: LastFMLibraryGetArtistsParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMLibraryGetArtistsResponse> {
-		return new LastFMApiRequest<LastFMLibraryGetArtistsResponse>()
+		return new LastFMApiRequest<LastFMLibraryGetArtistsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,

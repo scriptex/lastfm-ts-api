@@ -13,7 +13,7 @@ export class LastFMAuth extends LastFM {
 		params: LastFMAuthGetMobileSessionParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMAuthSessionResponse> {
-		return new LastFMApiRequest<LastFMAuthSessionResponse>()
+		return new LastFMApiRequest<LastFMAuthSessionResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -27,7 +27,7 @@ export class LastFMAuth extends LastFM {
 		params: LastFMAuthGetSessionParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMAuthSessionResponse> {
-		return new LastFMApiRequest<LastFMAuthSessionResponse>()
+		return new LastFMApiRequest<LastFMAuthSessionResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -38,7 +38,7 @@ export class LastFMAuth extends LastFM {
 	}
 
 	public getToken(callback?: LastFMUnknownFunction): Promise<LastFMAuthGetTokenResponse> {
-		return new LastFMApiRequest<LastFMAuthGetTokenResponse>()
+		return new LastFMApiRequest<LastFMAuthGetTokenResponse>(this.config)
 			.set({
 				api_key: this.apiKey,
 				method: 'auth.getToken'
