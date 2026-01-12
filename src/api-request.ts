@@ -99,7 +99,17 @@ export class LastFMApiRequest<T> {
 			}
 
 			if (data?.error) {
-				throw new Error(`lastfm-ts-api: ${data?.message ?? 'LastFM API returned an error.'}`);
+				let msg = 'LastFM API returned an error.';
+
+				if (data?.error?.['#text'] !== undefined) {
+					const code = data?.error?.code !== undefined ? ` (Code ${data.error.code})` : '';
+
+					msg = `${data?.error?.['#text']}${code}`;
+				} else if (data?.message !== undefined) {
+					msg = data.message;
+				}
+
+				throw new Error(`lastfm-ts-api: ${msg}`);
 			}
 
 			return data;
