@@ -963,32 +963,34 @@ export type LastFMTrackGetTopTagsResponse = Readonly<{
 	};
 }>;
 
+export type LastFMScrobbledTrack = {
+	track: {
+		corrected: LastFMBooleanNumber;
+		'#text': string;
+	};
+	artist: {
+		corrected: LastFMBooleanNumber;
+		'#text': string;
+	};
+	album: {
+		corrected: LastFMBooleanNumber;
+		'#text': string;
+	};
+	albumArtist: {
+		corrected: LastFMBooleanNumber;
+		'#text': string;
+	};
+	timestamp: number;
+	ignoredMessage: {
+		code: number;
+		'#text': string;
+	};
+};
+
 // This might not be the correct shape of the response
 export type LastFMTrackScroblleResponse = Readonly<{
 	scrobbles: {
-		scrobble: Array<{
-			track: {
-				corrected: LastFMBooleanNumber;
-				'#text': string;
-			};
-			artist: {
-				corrected: LastFMBooleanNumber;
-				'#text': string;
-			};
-			album: {
-				corrected: LastFMBooleanNumber;
-				'#text': string;
-			};
-			albumArtist: {
-				corrected: LastFMBooleanNumber;
-				'#text': string;
-			};
-			timestamp: number;
-			ignoredMessage: {
-				code: number;
-				'#text': string;
-			};
-		}>;
+		scrobble: LastFMScrobbledTrack | LastFMScrobbledTrack[];
 		'@attr': {
 			accepted: number;
 			ignored: number;
@@ -1443,3 +1445,8 @@ export type LastFMUserGetWeeklyTrackChartResponse = Readonly<{
 		};
 	};
 }>;
+
+export type OptionalConfig = {
+	hostname: string;
+	path: string;
+};

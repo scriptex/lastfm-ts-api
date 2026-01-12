@@ -19,7 +19,7 @@ export class LastFMTag extends LastFM {
 		params: LastFMTagGetInfoParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTagGetInfoResponse> {
-		return new LastFMApiRequest<LastFMTagGetInfoResponse>()
+		return new LastFMApiRequest<LastFMTagGetInfoResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -29,7 +29,7 @@ export class LastFMTag extends LastFM {
 	}
 
 	public getSimilar(params: LastFMTagParams, callback?: LastFMUnknownFunction): Promise<LastFMTagGetSimilarResponse> {
-		return new LastFMApiRequest<LastFMTagGetSimilarResponse>()
+		return new LastFMApiRequest<LastFMTagGetSimilarResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -42,7 +42,7 @@ export class LastFMTag extends LastFM {
 		params: LastFMTagGetTopParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTagGetTopAlbumsResponse> {
-		return new LastFMApiRequest<LastFMTagGetTopAlbumsResponse>()
+		return new LastFMApiRequest<LastFMTagGetTopAlbumsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -55,7 +55,7 @@ export class LastFMTag extends LastFM {
 		params: LastFMTagGetTopParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTagGetTopArtistsResponse> {
-		return new LastFMApiRequest<LastFMTagGetTopArtistsResponse>()
+		return new LastFMApiRequest<LastFMTagGetTopArtistsResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -65,7 +65,7 @@ export class LastFMTag extends LastFM {
 	}
 
 	public getTopTags(callback?: LastFMUnknownFunction): Promise<LastFMTagGetTopTagsResponse> {
-		return new LastFMApiRequest<LastFMTagGetTopTagsResponse>()
+		return new LastFMApiRequest<LastFMTagGetTopTagsResponse>(this.config)
 			.set({
 				api_key: this.apiKey,
 				method: 'tag.getTopTags'
@@ -77,7 +77,7 @@ export class LastFMTag extends LastFM {
 		params: LastFMTagGetTopParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTagGetTopTracksResponse> {
-		return new LastFMApiRequest<LastFMTagGetTopTracksResponse>()
+		return new LastFMApiRequest<LastFMTagGetTopTracksResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,
@@ -90,7 +90,7 @@ export class LastFMTag extends LastFM {
 		params: LastFMTagParams,
 		callback?: LastFMUnknownFunction
 	): Promise<LastFMTagGetWeeklyChartListResponse> {
-		return new LastFMApiRequest<LastFMTagGetWeeklyChartListResponse>()
+		return new LastFMApiRequest<LastFMTagGetWeeklyChartListResponse>(this.config)
 			.set(params)
 			.set({
 				api_key: this.apiKey,

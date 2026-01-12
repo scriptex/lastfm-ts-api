@@ -2,13 +2,16 @@ import { createHash } from 'node:crypto';
 import { parse, stringify } from 'node:querystring';
 import { request, RequestOptions } from 'node:https';
 
-import { LastFMParams, LastFMUnknownFunction } from './types.js';
+import { LastFMParams, LastFMUnknownFunction, OptionalConfig } from './types.js';
 
 export class LastFMApiRequest<T> {
-	private params: Map<string, any> = new Map();
+	public config: OptionalConfig;
 
-	constructor() {
+	private readonly params: Map<string, any> = new Map();
+
+	constructor(config: OptionalConfig) {
 		this.params.set('format', 'json');
+		this.config = config;
 	}
 
 	public set<P>(params: LastFMParams<void | P>): this {
@@ -96,7 +99,17 @@ export class LastFMApiRequest<T> {
 			}
 
 			if (data?.error) {
-				throw new Error(`lastfm-ts-api: ${data?.message ?? 'LastFM API returned an error.'}`);
+				let msg = 'LastFM API returned an error.';
+
+				if (data?.error?.['#text'] !== undefined) {
+					const code = data?.error?.code !== undefined ? ` (Code ${data.error.code})` : '';
+
+					msg = `${data?.error?.['#text']}${code}`;
+				} else if (data?.message !== undefined) {
+					msg = data.message;
+				}
+
+				throw new Error(`lastfm-ts-api: ${msg}`);
 			}
 
 			return data;
@@ -143,8 +156,8 @@ export class LastFMApiRequest<T> {
 
 	private getOptions(method: string | LastFMUnknownFunction | undefined, params: string): RequestOptions {
 		const options: RequestOptions = {
-			hostname: 'ws.audioscrobbler.com',
-			path: '/2.0'
+			hostname: this.config.hostname ?? 'ws.audioscrobbler.com',
+			path: this.config.path ?? '/2.0'
 		};
 
 		if (method === 'POST') {
