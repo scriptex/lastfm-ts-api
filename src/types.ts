@@ -1447,6 +1447,7 @@ export type LastFMUserGetWeeklyTrackChartResponse = Readonly<{
 }>;
 
 export type OptionalConfig = {
-	hostname: string;
-	path: string;
+	hostname?: string;
+	path?: string;
+	timeout?: number;
 };
