@@ -146,8 +146,8 @@ export class LastFMApiRequest<T> {
 				? method
 				: undefined
 			: typeof callback === 'function'
-			? callback
-			: undefined;
+				? callback
+				: undefined;
 	}
 
 	private getMethod(method?: string | LastFMUnknownFunction): string | LastFMUnknownFunction | undefined {
@@ -160,7 +160,7 @@ export class LastFMApiRequest<T> {
 			path: this.config.path ?? '/2.0'
 		};
 
-		if(this.config.timeout !== undefined) {
+		if (this.config.timeout !== undefined) {
 			options.signal = AbortSignal.timeout(this.config.timeout);
 		}
 

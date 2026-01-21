@@ -136,7 +136,7 @@ Optionally, supply the maximum number of milliseconds which a request can take t
 import { LastFMTrack } from 'lastfm-ts-api';
 
 const track = new LastFMTrack('API_KEY', 'SECRET', 'SESSION_KEY', {
-    timeout: 3000 // timeout request after 3 seconds, throws an exception
+	timeout: 3000 // timeout request after 3 seconds, throws an exception
 });
 ```
 
