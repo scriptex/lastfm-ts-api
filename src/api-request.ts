@@ -1,9 +1,9 @@
 import { createHash } from 'node:crypto';
 import { parse, stringify } from 'node:querystring';
+import { IncomingMessage } from 'node:http';
 import { request, RequestOptions } from 'node:https';
 
 import { LastFMParams, LastFMUnknownFunction, OptionalConfig } from './types.js';
-import { IncomingMessage } from 'node:http';
 
 export class LastFMApiRequest<T> {
 	public config: OptionalConfig;
@@ -91,8 +91,11 @@ export class LastFMApiRequest<T> {
 
 			httpRequest.end();
 		}).then(([response, content]) => {
-			if(response.headers['content-type'] !== 'application/json') {
-				throw new LastFMResponseError(`lastfm-ts-api: Expected JSON response but received '${response.headers['content-type']}'`, { response, content });
+			if (response.headers['content-type'] !== 'application/json') {
+				throw new LastFMResponseError(
+					`lastfm-ts-api: Expected JSON response but received '${response.headers['content-type']}'`,
+					{ response, content }
+				);
 			}
 
 			let data;
@@ -100,7 +103,11 @@ export class LastFMApiRequest<T> {
 			try {
 				data = JSON.parse(content);
 			} catch (err) {
-				throw new LastFMResponseError(`lastfm-ts-api: Unable to parse LastFM API response to JSON.`, { cause: err, response, content });
+				throw new LastFMResponseError(`lastfm-ts-api: Unable to parse LastFM API response to JSON.`, {
+					cause: err,
+					response,
+					content
+				});
 			}
 
 			if (data?.error) {
@@ -187,7 +194,7 @@ export class LastFMResponseError extends Error {
 	public response?: IncomingMessage;
 	public content?: string;
 
-	public constructor(message: string, options?: ErrorOptions & { response?: IncomingMessage, content?: string }) {
+	public constructor(message: string, options?: ErrorOptions & { response?: IncomingMessage; content?: string }) {
 		super(message, options);
 		this.name = 'LastFMResponseError';
 		const { content, response } = options ?? {};
