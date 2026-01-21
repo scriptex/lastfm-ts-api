@@ -3,6 +3,7 @@ import { parse, stringify } from 'node:querystring';
 import { request, RequestOptions } from 'node:https';
 
 import { LastFMParams, LastFMUnknownFunction, OptionalConfig } from './types.js';
+import { IncomingMessage } from 'node:http';
 
 export class LastFMApiRequest<T> {
 	public config: OptionalConfig;
@@ -72,13 +73,13 @@ export class LastFMApiRequest<T> {
 		const paramsStr = stringify(paramsObj);
 		const options = this.getOptions(method, paramsStr);
 
-		const LastFMapiRequest = new Promise<string>((resolve, reject) => {
+		const LastFMapiRequest = new Promise<[IncomingMessage, string]>((resolve, reject) => {
 			const httpRequest = request(options, httpResponse => {
 				let data = '';
 
 				httpResponse.setEncoding('utf8');
 				httpResponse.on('data', chunk => (data += chunk));
-				httpResponse.on('end', () => resolve(data));
+				httpResponse.on('end', () => resolve([httpResponse, data]));
 				httpResponse.on('error', err => reject(err));
 			});
 
@@ -89,13 +90,17 @@ export class LastFMApiRequest<T> {
 			}
 
 			httpRequest.end();
-		}).then((response: string) => {
+		}).then(([response, content]) => {
+			if(response.headers['content-type'] !== 'application/json') {
+				throw new LastFMResponseError(`lastfm-ts-api: Expected JSON response but received '${response.headers['content-type']}'`, { response, content });
+			}
+
 			let data;
 
 			try {
-				data = JSON.parse(response);
+				data = JSON.parse(content);
 			} catch (err) {
-				throw new Error(`lastfm-ts-api: Unable to parse LastFM API response to JSON. API response is ${err}`);
+				throw new LastFMResponseError(`lastfm-ts-api: Unable to parse LastFM API response to JSON.`, { cause: err, response, content });
 			}
 
 			if (data?.error) {
@@ -109,7 +114,7 @@ export class LastFMApiRequest<T> {
 					msg = data.message;
 				}
 
-				throw new Error(`lastfm-ts-api: ${msg}`);
+				throw new LastFMResponseError(`lastfm-ts-api: ${msg}`, { response, content });
 			}
 
 			return data;
@@ -175,6 +180,19 @@ export class LastFMApiRequest<T> {
 		}
 
 		return options;
+	}
+}
+
+export class LastFMResponseError extends Error {
+	public response?: IncomingMessage;
+	public content?: string;
+
+	public constructor(message: string, options?: ErrorOptions & { response?: IncomingMessage, content?: string }) {
+		super(message, options);
+		this.name = 'LastFMResponseError';
+		const { content, response } = options ?? {};
+		this.response = response;
+		this.content = content;
 	}
 }
 
