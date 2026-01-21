@@ -160,6 +160,10 @@ export class LastFMApiRequest<T> {
 			path: this.config.path ?? '/2.0'
 		};
 
+		if(this.config.timeout !== undefined) {
+			options.signal = AbortSignal.timeout(this.config.timeout);
+		}
+
 		if (method === 'POST') {
 			options.method = 'POST';
 			options.headers = {

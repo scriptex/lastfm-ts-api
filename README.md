@@ -127,6 +127,19 @@ const track = new LastFMTrack('API_KEY', 'SECRET', 'SESSION_KEY', {
 
 **Note:** In order to interact with another scrobbling platform you need to supply an API key for that platform.
 
+## Timeout
+
+Optionally, supply the maximum number of milliseconds which a request can take to complete. This can be useful if your application needs quick responses or to fail fast.
+
+```ts
+// To interact with the Track API:
+import { LastFMTrack } from 'lastfm-ts-api';
+
+const track = new LastFMTrack('API_KEY', 'SECRET', 'SESSION_KEY', {
+    timeout: 3000 // timeout request after 3 seconds, throws an exception
+});
+```
+
 ## LICENSE
 
 MIT
