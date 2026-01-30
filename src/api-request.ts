@@ -91,9 +91,9 @@ export class LastFMApiRequest<T> {
 
 			httpRequest.end();
 		}).then(([response, content]) => {
-			if (response.headers['content-type'] !== 'application/json') {
+			if (!response.headers['content-type']?.includes('application/json')) {
 				throw new LastFMResponseError(
-					`lastfm-ts-api: Expected JSON response but received '${response.headers['content-type']}'`,
+					`lastfm-ts-api: Expected JSON response ('application/json') but received '${response.headers['content-type']}'`,
 					{ response, content }
 				);
 			}
