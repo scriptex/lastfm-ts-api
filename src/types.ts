@@ -880,7 +880,7 @@ export type LastFMTrackGetInfoResponse = Readonly<{
 			mbid: string;
 			url: string;
 		};
-		album: {
+		album?: {
 			artist: string;
 			title: string;
 			mbid: string;
